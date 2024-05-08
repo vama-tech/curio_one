@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="robot">
+
+    <xacro:include filename="intertial_macros.xacro"/>
+
+    <!-- PARAMETERS -->
+
+    <!-- CHASSIS PARAMETERS -->
+    <xacro:property name="chassis_radius" value="0.300"/>
+    <xacro:property name="chassis_thickness" value="0.138"/>
+    <xacro:property name="chassis_mass" value="1.0"/>
+    
+    <!-- OFFSET PARAMETERS -->
+    <xacro:property name="wheel_offset_x" value="0.265"/>
+    <xacro:property name="wheel_offset_y" value="0.148"/>
+    <xacro:property name="wheel_offset_z" value="0.01"/>
+
+    <!-- WHEELS PARAMETERS -->
+    <xacro:property name="wheel_radius" value="0.033"/>
+    <xacro:property name="wheel_thickness" value="0.026"/>
+    <xacro:property name="wheel_mass" value="0.05"/>
+
+    <!-- CASTER WHEEL PARAMETERS -->
+    <xacro:property name="caster_wheel_radius" value="0.01"/>
+    <xacro:property name="caster_wheel_mass" value="0.01"/>
+
+    <!-- CASTER WHEEL OFFSET PARAMTERS -->
+    <xacro:property name="caster_wheel_offset_x" value="0.075"/>
+    <xacro:property name="caster_wheel_offset_z" value="${wheel_offset_z - wheel_radius + castor_wheel_radius}"/>
+
+    <!-- XACRO COLORS -->
+    <material name="white">
+        <color rgba="1 1 1 1"/>
+    </material>
+
+    <material name="orange">
+        <color rgba="1 0.3 0.1 1"/>
+    </material>
+
+    <material name="grey">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+    </material>
+
+    <material name="green">
+        <color rgba="0 0.8 0 1.0"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.2 0.2 1 1"/>
+    <material>
+
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+
+    <material name="red">
+        <color rgba="1 0 0 1"/>
+    </material>
+
+    <material name="silver">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+    </material>
+
+
+    <!-- BASE LINK -->
+    <link name="base_link">
+    </link>
+
+    <!-- CHASSIS JOINT -->
+    <joint name="chassis_joint">
+        <parent link="base_link"/>
+        <child link="chassis"/>
+        <origin xyz="${-wheel_offset_x} 0 ${-wheel_offset_z}"/>
+    </joint>
+
+    <!-- CHASSIS LINK -->
+    <link name="chassis">
+        
+        <!-- VISUAL -->
+        <visual>
+            <origin xyz="${chassis_radius/2} 0 ${chassis_height/2}"/>
+            <geometry>
+                <cylinder radius="${chassis_radius}" length="${chassis_thickness}"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        
+        <!-- COLLISION -->
+        <collision>
+            <origin xyz="${chassis_radius/2} 0 ${chassis_height/2}"/>
+            <geometry>
+                <cylinder radius="${chassis_radius}" length="${chassis_thickness}"/>
+            </geometry>
+        </collision>
+        
+        <!-- INERTIA -->
+        
+    </link>
+
+    <!-- LEFT WHEEL JOINT -->
+
+    <joint name="left_wheel_joint", type="continous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="${chassis_radius/2} ${wheel_offset_y} 0" rpy="-${pi/2} 0 0" />
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <!-- LEFT WHEEL LINK -->
+
+    <link name="left_wheel">
+        
+        <!-- VISUAL -->
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+
+        <!-- COLLISION -->
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius}"/>
+            </geometry>
+        </collision>
+
+        <!-- INERTIA -->
+
+    </link>
+
+    <!-- RIGHT WHEEL JOINT -->
+    <joint name="right_wheel_joint" type="continous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="${chassis_radius/2} ${-wheel_offset_y} 0" rpy="${pi/2} 0 0"/>
+        <axis xyz="0 0 -1"/>
+    </joint>
+
+    <!-- RIGHT WHEEL LINK -->
+    <link name="right_wheel">
+        
+        <!-- VISUAL -->
+        <visual>
+            <geometry>
+                <cylinder radius="${wheel_radius}" length="${wheel_thickness}"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+
+        <!-- COLLISION -->
+        <collision>
+            <geometry>
+                <sphere radius="${wheel_radius}"/>
+            </geometry>
+        </collision>
+
+        <!-- INERTIA -->
+
+    </link>
+
+    <!-- REAR CASTER WHEEL -->
+    
+    <!-- REAR CASTER WHEEL JOINT -->
+    <joint name="rear_caster_wheel_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="rear_caster_wheel"/>
+        <orign xyz="${caster_wheel_offset_x} 0 ${caster_wheel_offset_z}"/>
+    </joint>
+
+    <!-- REAR CASTER WHEEL LINK -->
+    <link name="rear_caster_wheel">
+        <!-- VISUAL -->
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+
+        <!-- COLLISION -->
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collison>
+
+        <!-- INERTIA -->
+
+    </link>
+
+    <!-- LEFT CASTER WHEEL  -->
+
+    <joint name="left_caster_wheel_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="left_caster_wheel"/>
+        <orign xyz="${chassis_radius*0.75} ${chassis_radius/2} ${caster_wheel_offset_z}"/>
+    </joint>
+
+    <!-- LEFT CASTER WHEEL LINK -->
+    <link name="left_caster_wheel">
+        <!-- VISUAL -->
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+
+        <!-- COLLISION -->
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collison>
+
+        <!-- INERTIA -->
+        
+    </link>
+
+    <!-- RIGHT CASTER WHEEL 2 -->
+
+    <joint name="right_caster_wheel_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="right_caster_wheel"/>
+        <orign xyz="${caster_radius*0.75} ${chassis_radius/2} ${caster_wheel_offset_z}"/>
+    </joint>
+
+    <!-- REAR CASTER WHEEL LINK -->
+    <link name="right_caster_wheel">
+        <!-- VISUAL -->
+        <visual>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+            <material name="black"/>
+        </visual>
+
+        <!-- COLLISION -->
+        <collision>
+            <geometry>
+                <sphere radius="${caster_wheel_radius}"/>
+            </geometry>
+        </collison>
+
+        <!-- INERTIA -->
+        
+    </link>
+
+</robot>
