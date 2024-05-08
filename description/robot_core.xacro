@@ -71,6 +71,9 @@
     <link name="base_link">
     </link>
 
+
+    <!-- ================================================================================== -->
+    
     <!-- CHASSIS JOINT -->
     <joint name="chassis_joint">
         <parent link="base_link"/>
@@ -78,8 +81,6 @@
         <origin xyz="${-wheel_offset_x} 0 ${-wheel_offset_z}"/>
     </joint>
 
-
-    <!-- ================================================================================== -->
 
     <!-- CHASSIS LINK -->
     <link name="chassis">
