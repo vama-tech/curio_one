@@ -60,8 +60,11 @@
     <material name="silver">
         <color rgba="0.7 0.7 0.7 1.0"/>
     </material>
+    
+    <!-- ========================================================= -->
 
-
+    <!-- BASE FOOTPRINT -->
+    
     <!-- BASE LINK -->
     <link name="base_link">
     </link>
