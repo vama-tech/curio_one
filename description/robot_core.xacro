@@ -26,7 +26,7 @@
     <xacro:property name="caster_wheel_mass" value="0.01"/>
 
     <!-- CASTER WHEEL OFFSET PARAMTERS -->
-    <xacro:property name="caster_wheel_offset_x" value="0.075"/>
+    <xacro:property name="caster_wheel_offset_x" value="0.1"/>
     <xacro:property name="caster_wheel_offset_z" value="${wheel_offset_z - wheel_radius + caster_wheel_radius}"/>
 
     <!-- ================================================================================== -->
@@ -88,7 +88,7 @@
         
         <!-- VISUAL -->
         <visual>
-            <origin xyz="${chassis_length/2} 0 ${chassis_height}"/>
+            <origin xyz="0 0 0.05"/>
             <geometry>
                 <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
@@ -97,7 +97,7 @@
         
         <!-- COLLISION -->
         <collision>
-            <origin xyz="${chassis_length/2} 0 ${chassis_height}"/>
+            <origin xyz="0 0 ${chassis_height}"/>
             <geometry>
                 <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
@@ -105,7 +105,7 @@
         
         <!-- INERTIA -->
         <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
-            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}" rpy="0 0 0"/>
+            <origin xyz="0 0 ${chassis_height/2}" rpy="0 0 0"/>
         </xacro:inertial_box>
         
     </link>
@@ -204,9 +204,9 @@
     
     <!-- REAR CASTER WHEEL JOINT -->
     <joint name="rear_caster_wheel_joint" type="fixed">
-        <parent link="chassis"/>
+        <parent link="base_link"/>
         <child link="rear_caster_wheel"/>
-        <orign xyz="${caster_wheel_offset_x} 0 ${caster_wheel_offset_z}"/>
+        <orign xyz="0.300 0.260 ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- REAR CASTER WHEEL LINK -->
@@ -284,7 +284,7 @@
     <joint name="right_caster_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="right_caster_wheel"/>
-        <orign xyz="${chassis_length*0.75} ${chassis_length/2} ${caster_wheel_offset_z}"/>
+        <orign xyz="${chassis_length} ${chassis_width} ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- REAR CASTER WHEEL LINK -->
