@@ -6,17 +6,18 @@
     <!-- PARAMETERS -->
 
     <!-- CHASSIS PARAMETERS -->
-    <xacro:property name="chassis_radius" value="0.250"/>
-    <xacro:property name="chassis_thickness" value="0.110"/>
+    <xacro:property name="chassis_length" value="0.370"/>
+    <xacro:property name="chassis_width" value="0.380"/>
+    <xacro:property name="chassis_height" value="0.140"/>
     <xacro:property name="chassis_mass" value="1.0"/>
     
     <!-- OFFSET PARAMETERS -->
-    <xacro:property name="wheel_offset_x" value="0.265"/>
+    <xacro:property name="wheel_offset_x" value="0.285"/>
     <xacro:property name="wheel_offset_y" value="0.148"/>
     <xacro:property name="wheel_offset_z" value="0.01"/>
 
     <!-- WHEELS PARAMETERS -->
-    <xacro:property name="wheel_radius" value="0.066"/>
+    <xacro:property name="wheel_radius" value="0.1"/>
     <xacro:property name="wheel_thickness" value="0.026"/>
     <xacro:property name="wheel_mass" value="0.05"/>
 
@@ -87,25 +88,25 @@
         
         <!-- VISUAL -->
         <visual>
-            <origin xyz="${chassis_radius/2} 0 ${chassis_thickness}"/>
+            <origin xyz="${chassis_length/2} 0 ${chassis_height}"/>
             <geometry>
-                <cylinder radius="${chassis_radius}" length="${chassis_thickness}"/>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
             <material name="silver"/>
         </visual>
         
         <!-- COLLISION -->
         <collision>
-            <origin xyz="${chassis_radius/2} 0 ${chassis_thickness}"/>
+            <origin xyz="${chassis_length/2} 0 ${chassis_height}"/>
             <geometry>
-                <cylinder radius="${chassis_radius}" length="${chassis_thickness}"/>
+                <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
             </geometry>
         </collision>
         
         <!-- INERTIA -->
-        <xacro:inertial_cylinder mass="${chassis_mass}" length="${chassis_thickness}" radius="${chassis_radius}">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:inertial_cylinder>
+        <xacro:inertial_box mass="${chassis_mass}" x="${chassis_length}" y="${chassis_width}" z="${chassis_height}">
+            <origin xyz="${chassis_length/2} 0 ${chassis_height/2}" rpy="0 0 0"/>
+        </xacro:inertial_box>
         
     </link>
 
@@ -244,7 +245,7 @@
     <joint name="left_caster_wheel_joint" type="fixed">
         <parent link="chassis"/>
         <child link="left_caster_wheel"/>
-        <orign xyz="${chassis_radius*0.75} ${chassis_radius/2} ${caster_wheel_offset_z}"/>
+        <orign xyz="${chassis_length*0.75} ${chassis_length/2} ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- LEFT CASTER WHEEL LINK -->
@@ -283,7 +284,7 @@
     <joint name="right_caster_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="right_caster_wheel"/>
-        <orign xyz="${chassis_radius*0.75} ${chassis_radius/2} ${caster_wheel_offset_z}"/>
+        <orign xyz="${chassis_length*0.75} ${chassis_length/2} ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- REAR CASTER WHEEL LINK -->
