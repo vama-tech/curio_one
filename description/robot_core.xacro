@@ -14,7 +14,7 @@
     <!-- OFFSET PARAMETERS -->
     <xacro:property name="wheel_offset_x" value="0.285"/>
     <xacro:property name="wheel_offset_y" value="0.148"/>
-    <xacro:property name="wheel_offset_z" value="0.08"/>
+    <xacro:property name="wheel_offset_z" value="0.005"/>
 
     <!-- WHEELS PARAMETERS -->
     <xacro:property name="wheel_radius" value="0.1"/>
