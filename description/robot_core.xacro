@@ -111,7 +111,7 @@
     </link>
 
     <!-- GAZEBO CHASSIS -->
-    <gazebo refernce="chassis">
+    <gazebo reference="chassis">
         <material>Gazebo/Silver</material>
     </gazebo>
 
@@ -154,7 +154,7 @@
     </link>
 
     <!-- GAZEBO LEFT WHEEL -->
-    <gazebo refernce="left_wheel">
+    <gazebo reference="left_wheel">
         <material>Gazebo/Blue</material>
     </gazebo>
 
@@ -194,7 +194,7 @@
     </link>
 
     <!-- GAZEBO RIGHT WHEEL -->
-    <gazebo refernce="right_wheel">
+    <gazebo reference="right_wheel">
         <material>Gazebo/Blue</material>
     </gazebo>
 
@@ -233,7 +233,7 @@
     </link>
 
     <!-- GAZEBO REAR CASTER WHEEL -->
-    <gazebo refernce="rear_caster_wheel">
+    <gazebo reference="rear_caster_wheel">
         <material>Gazebo/Black</material>
         <mu1 value="0.001"/>
         <mu2 value="0.001"/>
@@ -273,7 +273,7 @@
     </link>
 
     <!-- GAZEBO LEFT CASTER WHEEL -->
-    <gazebo refernce="left_caster_wheel">
+    <gazebo reference="left_caster_wheel">
         <material>Gazebo/Black</material>
         <mu1 value="0.001"/>
         <mu2 value="0.001"/>
@@ -311,7 +311,7 @@
     </link>
 
     <!-- GAZEBO RIGHT CASTER WHEEL -->
-    <gazebo refernce="right_caster_wheel">
+    <gazebo reference="right_caster_wheel">
         <material>Gazebo/Black</material>
         <mu1 value="0.001"/>
         <mu2 value="0.001"/>
