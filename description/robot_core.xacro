@@ -26,7 +26,8 @@
     <xacro:property name="caster_wheel_mass" value="0.01"/>
 
     <!-- CASTER WHEEL OFFSET PARAMTERS -->
-    <xacro:property name="caster_wheel_offset_x" value="0.1"/>
+    <xacro:property name="caster_wheel_offset_x" value="0.13"/>
+    <xacro:property name="caster_wheel_offset_y" value="0.11"/>
     <xacro:property name="caster_wheel_offset_z" value="${wheel_offset_z - wheel_radius + caster_wheel_radius}"/>
 
     <!-- ================================================================================== -->
@@ -206,7 +207,7 @@
     <joint name="rear_caster_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="rear_caster_wheel"/>
-        <orign xyz="0.300 0.260 ${caster_wheel_offset_z}"/>
+        <origin xyz="${-caster_wheel_offset_x} 0 ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- REAR CASTER WHEEL LINK -->
@@ -245,7 +246,7 @@
     <joint name="left_caster_wheel_joint" type="fixed">
         <parent link="chassis"/>
         <child link="left_caster_wheel"/>
-        <orign xyz="${chassis_length*0.75} ${chassis_length/2} ${caster_wheel_offset_z}"/>
+        <origin xyz="0.15 ${caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- LEFT CASTER WHEEL LINK -->
@@ -284,7 +285,7 @@
     <joint name="right_caster_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="right_caster_wheel"/>
-        <orign xyz="${chassis_length} ${chassis_width} ${caster_wheel_offset_z}"/>
+        <origin xyz="0.15 ${-caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
     </joint>
 
     <!-- REAR CASTER WHEEL LINK -->
