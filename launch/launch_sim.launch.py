@@ -41,6 +41,19 @@ def generate_launch_description():
         [FindPackageShare("curio_one"),"config","robot.rviz"]
     )
 
+    #Included the diff cont and joint broad to the launch file
+    diff_cont_spawner = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=["diff_cont"]
+    )
+
+    joint_broad_spawner = Node(
+        package="controller_manager",
+        executable="spawner.py",
+        arguments=["joint_broad"]
+    )
+
     rviz = Node(
         package="rviz2",
         executable="rviz2",
@@ -54,4 +67,6 @@ def generate_launch_description():
             rsp,
             gazebo,
             spawn_entity,
+            diff_cont_spawner,
+            joint_broad_spawner,
             rviz])
