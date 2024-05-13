@@ -37,36 +37,10 @@ def generate_launch_description():
                                    '-entity', 'curio_one'],
                         output='screen')
     
-    rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("curio_one"),"config","robot.rviz"]
-    )
-
-    #Included the diff cont and joint broad to the launch file
-    diff_cont_spawner = Node(
-        package="controller_manager",
-        executable="spawner.py",
-        arguments=["diff_cont"]
-    )
-
-    joint_broad_spawner = Node(
-        package="controller_manager",
-        executable="spawner.py",
-        arguments=["joint_broad"]
-    )
-
-    rviz = Node(
-        package="rviz2",
-        executable="rviz2",
-        name="rviz2",
-        output = "screen",
-        arguments=["-d",rviz_config_file,"use_sim_time:=true"]
-    )
     
 
     return LaunchDescription([
             rsp,
             gazebo,
-            spawn_entity,
-            diff_cont_spawner,
-            joint_broad_spawner,
-            rviz])
+            spawn_entity
+            ])
