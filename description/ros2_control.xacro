@@ -1,37 +1,31 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot xmlns:xacro="https://www.ros.org/wiki/xacro">
 
 
-    <ros2_control name="GazeboSystem" type="system">
-        
+    <ros2_control name="HardwareSystem" type="system">
         <hardware>
-            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            <plugin>curio_one/CurioBotSystemHardware</plugin>
+            <param name="left_wheel_name">left_wheel_joint</param>
+            <param name="right_wheel_name">right_wheel_joint</param>
+            <param name="device">/dev/ttyACM0</param>
+            <param name="baud_rate">57600</param>
+            <param name="timeout_ms">1000</param>
+            <param name="loop_rate">30</param>
+            <param name="enc_counts_per_rev">5042</param>
         </hardware>
-        
         <joint name="left_wheel_joint">
-            <command_interface name="velocity">
-                <param name="min">-20</param>
-                <param name="max">20</param>
-            </command_interface>
-            <state_interface name="velocity"/>
-            <state_interface name="position"/>
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
         </joint>
-        
+
         <joint name="right_wheel_joint">
-            <command_interface name="velocity">
-                <param name="min">-20</param>
-                <param name="max">20</param>
-            </command_interface>
-            <state_interface name="velocity"/>
-            <state_interface name="position"/>
+            <command_interface name="velocity" />
+            <state_interface name="position" />
+            <state_interface name="velocity" />
         </joint>
-    
+
     </ros2_control>
 
-    <gazebo>
-        <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-            <parameters>$(find curio_one)/config/my_controllers.yaml</parameters>
-        </plugin>
-    </gazebo>
 
 </robot>

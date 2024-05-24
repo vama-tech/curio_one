@@ -1,0 +1,4 @@
+source;share/curio_one/local_setup.bash
+source;share/curio_one/local_setup.dsv
+source;share/curio_one/local_setup.sh
+source;share/curio_one/local_setup.zsh
