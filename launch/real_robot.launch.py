@@ -41,7 +41,7 @@ def generate_launch_description():
 
     diff_drive_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["diff_cont"],
     )
 
@@ -54,7 +54,7 @@ def generate_launch_description():
 
     joint_broad_spawner = Node(
         package="controller_manager",
-        executable="spawner.py",
+        executable="spawner",
         arguments=["joint_broad"],
     )
 
@@ -65,6 +65,20 @@ def generate_launch_description():
     )
     )
 
+    sensor_broad_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["range_sensor_broadcaster"],
+
+    )
+
+    delayed_sensor_broad_spawner = RegisterEventHandler(
+        event_handler=OnProcessStart(
+            target_action=controller_manager,
+            on_start=[sensor_broad_spawner],
+        )
+    )
+
 
     return LaunchDescription([
         rsp,
@@ -72,4 +86,5 @@ def generate_launch_description():
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad,
+        delayed_sensor_broad_spawner
     ])

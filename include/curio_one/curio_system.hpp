@@ -16,11 +16,16 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
+#include "hardware_interface/sensor.hpp"
+#include "rclcpp/node.hpp"
 
 #include "curio_one/visibility_control.h"
 #include "curio_one/arduino_comms.hpp"
 #include "curio_one/wheel.hpp"
-
+#include "curio_one/sensor.hpp"
+#include "rclcpp/publisher.hpp" 
+#include "sensor_msgs/msg/range.hpp"
+// #include "curio_one/sensor_pub.hpp"
 
 
 
@@ -35,16 +40,23 @@ class CurioBotSystemHardware : public hardware_interface::SystemInterface
   std::string left_wheel_name = "";
   std::string right_wheel_name = "";
 
+  
+
   float loop_rate = 0.0;
   std::string device = "";
   int baud_rate = 0;
   int timeout_ms = 0;
   int enc_counts_per_rev = 0;
 
+  std::string sensor_name = "";
+  std::string sensor1_name = "";
+  std::string sensor2_name = "";
+  double reading;
 };
 public:
-  RCLCPP_SHARED_PTR_DEFINITIONS(CurioBotSystemHardware);
-
+  RCLCPP_SHARED_PTR_DEFINITIONS(CurioBotSystemHardware)
+  CurioBotSystemHardware() = default;
+  CurioBotSystemHardware(const rclcpp::Node::SharedPtr& node) : node_(node) {}
   CURIO_ONE_PUBLIC
   CallbackReturn on_init(const hardware_interface::HardwareInfo & info) override;
 
@@ -72,6 +84,11 @@ private:
   Config cfg_;
   Wheel wheel_l_;
   Wheel wheel_r_;
+  Sensors sensor_n_;
+  Sensors sensor_l_;
+  Sensors sensor_r_;
+  rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_;
+  rclcpp::Node::SharedPtr node_;
 
 };
 

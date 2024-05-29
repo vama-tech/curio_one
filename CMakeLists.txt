@@ -15,11 +15,49 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+set(THIS_PACKAGE_INCLUDE_DEPENDS
+  hardware_interface
+  pluginlib
+  rclcpp
+  rclcpp_lifecycle
+)
 # find dependencies
 find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
+  find_package(${Dependency} REQUIRED)
+endforeach()
+
+add_library(
+  curio_one
+  SHARED
+  include/curio_system.cpp
+
+)
+
+target_link_libraries(curio_one PUBLIC serial)
+target_compile_features(curio_one PUBLIC cxx_std_17)
+target_include_directories(curio_one PUBLIC
+$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
+$<INSTALL_INTERFACE:curio_one>
+)
+ament_target_dependencies(
+  curio_one PUBLIC
+  ${THIS_PACKAGE_INCLUDE_DEPENDS}
+)
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE "CURIO_ONE_BUILDING_DLL")
+
+pluginlib_export_plugin_description_file(hardware_interface curio_one.xml)
+
+install(TARGETS curio_one   
+  EXPORT export_curio_one   
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

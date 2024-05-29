@@ -9,6 +9,9 @@ controller_manager:
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    range_sensor_broadcaster:
+      type: range_sensor_broadcaster/RangeStateBroadcaster
+
 diff_cont:
   ros__parameters:
 
@@ -66,3 +69,18 @@ diff_cont:
 
 # joint_broad:
 #   ros__parameters:
+
+
+range_sensor_broadcaster:
+  ros__parameters:
+    sensor_name: 'Sensor' 
+    sensor1_name: "Sensor1"
+    sensor2_name: "Sensor2"
+    frame_id: 'tof'
+    field_of_view: 0.52
+    max_range: 4.0
+    min_range: 0.52
+    radiation_type: 0.0
+    variance: 0.0
+
+    
