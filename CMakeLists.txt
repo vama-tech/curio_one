@@ -74,5 +74,16 @@ install(
   DIRECTORY config description launch worlds
   DESTINATION share/${PROJECT_NAME}
 )
+ament_python_install_package(${PROJECT_NAME})
 
+
+install(PROGRAMS scripts/range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/1_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/2_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
 ament_package()

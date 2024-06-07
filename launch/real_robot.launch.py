@@ -85,7 +85,19 @@ def generate_launch_description():
             on_start=[sensor_broad_spawner],
         )
     )
+    range_file = Node(
+        package =package_name,
+        executable="range.py",
+    )
+    range1_file = Node(
+        package =package_name,
+        executable="1_range.py",
+    )
 
+    range2_file = Node(
+        package =package_name,
+        executable="2_range.py",
+    )
 
     return LaunchDescription([
         rsp,
@@ -93,5 +105,9 @@ def generate_launch_description():
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad,
-        delayed_sensor_broad_spawner
+        delayed_sensor_broad_spawner,
+        range_file,
+        range1_file,
+        range2_file
+
     ])

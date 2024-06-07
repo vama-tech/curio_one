@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/admin1/innovix2/src/curio_one/build",
+  "command": "/usr/bin/c++  -DCURIO_ONE_BUILDING_DLL -DDEFAULT_RMW_IMPLEMENTATION=rmw_cyclonedds_cpp -DRCUTILS_ENABLE_FAULT_INJECTION -Dcurio_one_EXPORTS -I/home/admin1/innovix2/src/curio_one/include -isystem /opt/ros/galactic/include  -g -fPIC   -Wall -Wextra -Wpedantic -std=gnu++17 -o CMakeFiles/curio_one.dir/include/curio_system.cpp.o -c /home/admin1/innovix2/src/curio_one/include/curio_system.cpp",
+  "file": "/home/admin1/innovix2/src/curio_one/include/curio_system.cpp"
+}
+]
