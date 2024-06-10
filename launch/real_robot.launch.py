@@ -85,6 +85,12 @@ def generate_launch_description():
             on_start=[sensor_broad_spawner],
         )
     )
+
+    joystick = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(
+                get_package_share_directory(package_name),'launch','joystick.launch.py'
+            )])
+)
     range_file = Node(
         package =package_name,
         executable="range.py",
@@ -98,6 +104,12 @@ def generate_launch_description():
         package =package_name,
         executable="2_range.py",
     )
+    delayed_joystick = RegisterEventHandler(
+    event_handler=OnProcessStart(
+        target_action=controller_manager,
+        on_start=[joystick],
+    )
+    )
 
     return LaunchDescription([
         rsp,
@@ -106,8 +118,9 @@ def generate_launch_description():
         delayed_diff_drive_spawner,
         delayed_joint_broad,
         delayed_sensor_broad_spawner,
+        delayed_joystick,
         range_file,
-        range1_file,
-        range2_file
+        # range1_file,
+        # range2_file
 
     ])

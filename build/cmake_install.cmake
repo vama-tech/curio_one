@@ -106,7 +106,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/admin1/innovix2/src/curio_one/scripts/2range.py")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/admin1/innovix2/src/curio_one/scripts/2_range.py")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
