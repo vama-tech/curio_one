@@ -110,6 +110,14 @@ def generate_launch_description():
         on_start=[joystick],
     )
     )
+    lidar = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(
+                get_package_share_directory(package_name),'launch','rplidar.launch.py'
+            )]))
+    delayed_lidar = RegisterEventHandler(
+    event_handler=OnProcessStart(
+        target_action=controller_manager,
+        on_start=[lidar]))
 
     return LaunchDescription([
         rsp,
@@ -121,6 +129,7 @@ def generate_launch_description():
         delayed_joystick,
         range_file,
         range1_file,
-        range2_file
+        range2_file,
+        delayed_lidar
 
     ])
