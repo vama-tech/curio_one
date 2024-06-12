@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Range
@@ -8,6 +10,7 @@ from geometry_msgs.msg import TransformStamped
 class SensorPublisher(Node):
     def __init__(self):
         super().__init__('sensor_publisher')
+        self.get_logger().info("Started Range Node")
         self.publisher_ = self.create_publisher(Range, '/range', 10)
         self.subscription_ = self.create_subscription(
             DynamicJointState,

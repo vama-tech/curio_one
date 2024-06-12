@@ -120,7 +120,7 @@ def generate_launch_description():
         delayed_sensor_broad_spawner,
         delayed_joystick,
         range_file,
-        # range1_file,
-        # range2_file
+        range1_file,
+        range2_file
 
     ])
