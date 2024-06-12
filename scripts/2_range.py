@@ -38,7 +38,7 @@ class SensorPublisher(Node):
                 # Publish transform
                 transform = TransformStamped()
                 transform.header.stamp = self.get_clock().now().to_msg()
-                transform.header.frame_id = 'odom'  # Set appropriate parent frame
+                transform.header.frame_id = 'base_link'  # Set appropriate parent frame
                 transform.child_frame_id = 'tof_joint_2'  # Set appropriate child frame
                 transform.transform.translation.x = 0.192  # Set appropriate translation
                 transform.transform.translation.y = -0.148
