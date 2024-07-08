@@ -86,4 +86,7 @@ install(PROGRAMS scripts/1_range.py
 install(PROGRAMS scripts/2_range.py
        DESTINATION lib/${PROJECT_NAME}
 )
+install(PROGRAMS scripts/icm20948_node.py
+       DESTINATION lib/${PROJECT_NAME}
+)
 ament_package()

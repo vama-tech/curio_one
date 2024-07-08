@@ -112,12 +112,43 @@ def generate_launch_description():
     )
     lidar = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([os.path.join(
-                get_package_share_directory(package_name),'launch','rplidar.launch.py'
+                get_package_share_directory(package_name),'launch','sllidar_a1_launch.py'
             )]))
     delayed_lidar = RegisterEventHandler(
     event_handler=OnProcessStart(
         target_action=controller_manager,
         on_start=[lidar]))
+
+
+    config_dir = os.path.join(get_package_share_directory(package_name), 'config')
+
+    madgwick = Node(
+                package='imu_filter_madgwick',
+                executable='imu_filter_madgwick_node',
+                name='imu_filter',
+                output='screen',
+                parameters=[os.path.join(config_dir, 'imu_filter.yaml')],
+            )
+    imu_params_file = os.path.join(get_package_share_directory(package_name),'config','ekf.yaml')
+    ekf_config = Node(
+                package='robot_localization',
+                executable='ekf_node',
+                name='ekf_filter_node',
+                output='screen',
+                parameters=[imu_params_file],
+                remappings=[("odom", LaunchConfiguration('odom_topic', default='/odom'))]
+
+            )
+    imu = Node(
+                package="ros2_icm20948",
+                executable="icm20948_node",
+                name="icm20948_node",
+                parameters=[
+                    {"i2c_address": 0x69},
+                    {"frame_id": "base_link"},
+                    {"pub_rate": 50},
+                ],
+            )
 
     return LaunchDescription([
         rsp,
@@ -130,6 +161,9 @@ def generate_launch_description():
         range_file,
         range1_file,
         range2_file,
-        delayed_lidar
+        imu,
+        madgwick,
+        ekf_config,
+        # delayed_lidar
 
     ])

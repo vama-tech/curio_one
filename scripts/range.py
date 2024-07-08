@@ -31,13 +31,13 @@ class SensorPublisher(Node):
                 range_msg.field_of_view = 0.1  # Set appropriate FOV
                 range_msg.min_range = 0.03  # Set appropriate min range
                 range_msg.max_range = 100.0  # Set appropriate max range
-                range_msg.range = sensor_value / 100
+                range_msg.range = sensor_value / 500.0
                 self.publisher_.publish(range_msg)
 
                 # Publish transform
                 transform = TransformStamped()
                 transform.header.stamp = self.get_clock().now().to_msg()
-                transform.header.frame_id = 'base_link'  # Set appropriate parent frame
+                transform.header.frame_id = 'chassis'  # Set appropriate parent frame
                 transform.child_frame_id = 'tof_joint'  # Set appropriate child frame
                 transform.transform.translation.x = 0.192  # Set appropriate translation
                 transform.transform.translation.y = 0.0

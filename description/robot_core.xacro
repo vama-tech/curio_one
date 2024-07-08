@@ -72,15 +72,15 @@
     </link>
 
     <!-- BASE FOOTPRINT JOINT -->
-    <!-- <joint name="base_footprint_joint" type="fixed">
+    <joint name="base_footprint_joint" type="fixed">
         <parent link="base_link"/>
         <child link="base_footprint"/>
         <origin xyz="0 0 0" rpy="0 0 0"/>
-    </joint> -->
+    </joint>
 
     <!-- BASE FOOTPRINT LINK -->
-    <!-- <link name="base_footprint">
-    </link> -->
+    <link name="base_footprint">
+    </link>
     
     <!-- ================================================================================== -->
     
@@ -88,7 +88,7 @@
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link"/>
         <child link="chassis"/>
-        <origin xyz="0 0 ${-wheel_offset_z}"/>
+        <origin xyz="0 0 ${-wheel_offset_z}" rpy="0 0 0"/>
     </joint>
 
 
@@ -130,7 +130,7 @@
     <!-- LEFT WHEEL JOINT -->
 
     <joint name="left_wheel_joint" type="continuous">
-        <parent link="base_link"/>
+        <parent link="chassis"/>
         <child link="left_wheel"/>
         <origin xyz="-0.01 ${wheel_offset_y} 0" rpy="-${pi/2} 0 0" />
         <axis xyz="0 0 1"/>
@@ -171,7 +171,7 @@
 
     <!-- RIGHT WHEEL JOINT -->
     <joint name="right_wheel_joint" type="continuous">
-        <parent link="base_link"/>
+        <parent link="chassis"/>
         <child link="right_wheel"/>
         <origin xyz="-0.01 ${-wheel_offset_y} 0" rpy="${pi/2} 0 0"/>
         <axis xyz="0 0 -1"/>
@@ -213,7 +213,7 @@
     
     <!-- REAR CASTER WHEEL JOINT -->
     <joint name="rear_caster_wheel_joint" type="fixed">
-        <parent link="base_link"/>
+        <parent link="chassis"/>
         <child link="rear_caster_wheel"/>
         <origin xyz="${-caster_wheel_offset_x} 0 ${caster_wheel_offset_z}"/>
     </joint>
@@ -291,7 +291,7 @@
     <!-- RIGHT CASTER WHEEL 2 -->
 
     <joint name="right_caster_wheel_joint" type="fixed">
-        <parent link="base_link"/>
+        <parent link="chassis"/>
         <child link="right_caster_wheel"/>
         <origin xyz="0.15 ${-caster_wheel_offset_y} ${caster_wheel_offset_z}"/>
     </joint>
