@@ -28,7 +28,7 @@ ekf_filter_node:
     odom0_queue_size: 10
     odom0_nodelay: true
     odom0_differential: true
-    odom0_relative: true
+    odom0_relative: false
 
     imu0: imu/data
     imu0_config: [false, false, false,
@@ -40,7 +40,7 @@ ekf_filter_node:
     imu0_differential: true
     imu0_relative: true
     imu0_queue_size: 10
-    imu0_remove_gravitational_acceleration: false
+    imu0_remove_gravitational_acceleration: true
 
     #                          X      Y       Z       R       P       Y       Vx      Vy        Vz      Vr      Vp      Vy      ax      ay      az   
     # process_noise_covariance: [0.05, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
