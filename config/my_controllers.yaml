@@ -9,6 +9,14 @@ controller_manager:
     joint_broad:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    # imu_broadcaster:
+    #   type: imu_sensor_broadcaster/IMUSensorBroadcaster
+
+# imu_broadcaster:
+#   ros__parameters:
+#     sensor_name: "imu"
+#     frame_id: "imu"
+
 diff_cont:
   ros__parameters:
 
@@ -18,7 +26,7 @@ diff_cont:
 
     left_wheel_names: ['left_wheel_joint']
     right_wheel_names: ['right_wheel_joint']
-    wheel_separation: 0.190
+    wheel_separation: 0.33
     wheel_radius: 0.05
 
     use_stamped_vel: false

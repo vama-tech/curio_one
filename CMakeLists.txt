@@ -71,8 +71,13 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY config description launch worlds
+  DIRECTORY config description launch maps worlds
   DESTINATION share/${PROJECT_NAME}
 )
 
+ament_python_install_package(${PROJECT_NAME})
+
+install(PROGRAMS scripts/imu_node.py
+       DESTINATION lib/${PROJECT_NAME}
+)
 ament_package()
