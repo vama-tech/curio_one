@@ -5,3 +5,9 @@ twist_mux:
         topic   : cmd_vel
         timeout : 0.5
         priority: 10
+
+      teleop_node:
+        topic   : cmd_vel_joy 
+        timeout : 0.5
+        priority: 10
+      
