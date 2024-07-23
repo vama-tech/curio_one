@@ -104,6 +104,11 @@ def generate_launch_description():
         package =package_name,
         executable="2_range.py",
     )
+
+    battery_file = Node(
+        package =package_name,
+        executable="battery_stat.py",
+    )
     delayed_joystick = RegisterEventHandler(
     event_handler=OnProcessStart(
         target_action=controller_manager,
@@ -161,6 +166,7 @@ def generate_launch_description():
         range_file,
         range1_file,
         range2_file,
+        battery_file,
         imu,
         madgwick,
         ekf_config,

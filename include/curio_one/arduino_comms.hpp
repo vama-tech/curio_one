@@ -113,7 +113,16 @@ public:
       val_4 = std::atof(token_4.c_str());
       val_5 = std::atof(token_5.c_str());
   }
+  void read_battery_volt(double &val_6)
+  {
+    std::string response = send_msg("B\r");
 
+    std::string delired = " ";  
+    size_t del_red = response.find(delired);
+    std::string token_6 = response.substr(0, del_red);
+
+    val_6 = std::atof(token_6.c_str());
+  }
   void set_motor_values(int val_1, int val_2)
   {
     std::stringstream ss;

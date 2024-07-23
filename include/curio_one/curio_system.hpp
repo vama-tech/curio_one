@@ -23,6 +23,7 @@
 #include "curio_one/arduino_comms.hpp"
 #include "curio_one/wheel.hpp"
 #include "curio_one/sensor.hpp"
+#include "curio_one/battery.hpp"
 #include "rclcpp/publisher.hpp" 
 #include "sensor_msgs/msg/range.hpp"
 // #include "curio_one/sensor_pub.hpp"
@@ -51,6 +52,8 @@ class CurioBotSystemHardware : public hardware_interface::SystemInterface
   std::string sensor_name = "";
   std::string sensor1_name = "";
   std::string sensor2_name = "";
+
+  std::string battery_name;
   double reading;
 };
 public:
@@ -87,6 +90,7 @@ private:
   Sensors sensor_n_;
   Sensors sensor_l_;
   Sensors sensor_r_;
+  Battery battery_;
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_;
   rclcpp::Node::SharedPtr node_;
 

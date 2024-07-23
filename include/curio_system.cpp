@@ -28,9 +28,12 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
     cfg_.baud_rate = std::stoi(info_.hardware_parameters["baud_rate"]);
     cfg_.timeout_ms = std::stoi(info_.hardware_parameters["timeout_ms"]);
     cfg_.enc_counts_per_rev = std::stoi(info_.hardware_parameters["enc_counts_per_rev"]);
+    cfg_.battery_name = info_.hardware_parameters["battery_name"];
+
 
     wheel_r_.setup(cfg_.right_wheel_name, cfg_.enc_counts_per_rev);
     wheel_l_.setup(cfg_.left_wheel_name, cfg_.enc_counts_per_rev);
+    battery_.setup(cfg_.battery_name); 
 
     // Initialize publisher for TOF sensor range data
     // range_ = node_->create_publisher<sensor_msgs::msg::Range>("tof_range", 10);
@@ -186,6 +189,15 @@ std::vector<hardware_interface::StateInterface> CurioBotSystemHardware::export_s
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         "tof_joint", "Sensor2", &sensor_r_.reading));
 
+    // Export state interface for the battery
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        battery_.name, "voltage", &battery_.voltage));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        battery_.name, "percentage", &battery_.percentage));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        battery_.name, "current", &battery_.current));
+
+
     return state_interfaces;
 }
 
@@ -237,6 +249,11 @@ hardware_interface::return_type CurioBotSystemHardware::read()
 
     // Read data from TOF sensor
     comms_.read_sensor_values(sensor_n_.reading, sensor_l_.reading, sensor_r_.reading);
+
+    //Read Volstge Data from Battery
+    double battery_voltage;
+    comms_.read_battery_volt(battery_voltage);
+    battery_.update_values(battery_voltage);
 
     // Publish sensor data
     // sensor_msgs::msg::Range range_msg;
