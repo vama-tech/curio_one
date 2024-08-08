@@ -58,7 +58,7 @@
     <joint name="tof_joint_1" type="fixed">
         <parent link="chassis"/>
         <child link="tof_1"/>
-        <origin xyz="0.192 0.148 0.06" rpy="0 0 ${pi/4}"/>
+        <origin xyz="0.192 0.148 0.06" rpy="0 0 0.523599"/>
     </joint>
 
     <link name="tof_2">
@@ -82,7 +82,7 @@
     <joint name="tof_joint_2" type="fixed">
         <parent link="chassis"/>
         <child link="tof_2"/>
-        <origin xyz="0.192 -0.148 0.06" rpy="0 0 -${pi/4}"/>
+        <origin xyz="0.192 -0.148 0.06" rpy="0 0 -0.523599"/>
     </joint>
 
     <gazebo reference="tof">
@@ -173,9 +173,9 @@
         </sensor> 
     </gazebo>
 
-    <gazebo reference="tof_2">
+    <gazebo reference="tof_2">  
         <material>Gazebo/Red</material>
-        <sensor name="tof_2" type="ray">
+        <sensor name="tof_2" type="ray">    
             <always_on>true</always_on>
             <visualize>true</visualize>
             <pose>0.0 0 0.0 0 0 0</pose>

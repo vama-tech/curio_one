@@ -92,4 +92,13 @@ install(PROGRAMS scripts/battery_stat.py
 install(PROGRAMS scripts/icm20948_node.py
        DESTINATION lib/${PROJECT_NAME}
 )
+install(PROGRAMS scripts/single_nav_pt.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/multi_nav_pt.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/home_nav.py
+       DESTINATION lib/${PROJECT_NAME}
+)
 ament_package()

@@ -42,11 +42,6 @@ ekf_filter_node:
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
-    position_covariance: [0.01, 0.0,  0.0,
-                          0.0,  0.01, 0.0,
-                          0.0,  0.0,  0.01]
-              
-
     #                          X      Y       Z       R       P       Y       Vx      Vy        Vz      Vr      Vp      Vy      ax      ay      az   
     # process_noise_covariance: [0.05, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
     #                            0.0,    0.05, 0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
