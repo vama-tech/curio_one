@@ -47,7 +47,7 @@ def main():
     # contain the shelf ID ('shelf_A') and shipping destination ('frieght_bay_3')
     ####################
     request_item_location = 'home'
-    request_destination = 'table_1'
+    request_destination = 'table_2'
     ####################
 
     rclpy.init()
@@ -103,7 +103,7 @@ def main():
 
     result = navigator.getResult()
     if result == TaskResult.SUCCEEDED:
-        print("PLease Load the Food!")
+        print("Please Load the Food!")
         playsound.playsound('/home/jetson/ros2_ws/src/curio_one/scripts/Load.mp3', True)
         time.sleep(10)
         print(

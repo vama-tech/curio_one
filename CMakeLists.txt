@@ -101,4 +101,28 @@ install(PROGRAMS scripts/multi_nav_pt.py
 install(PROGRAMS scripts/home_nav.py
        DESTINATION lib/${PROJECT_NAME}
 )
+install(PROGRAMS scripts/nav_follow_path.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/navigation_commender.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/nav_security.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/exibits.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/auto_dock.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/test_auto_dock.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/nav_recovery.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/yolo.py
+       DESTINATION lib/${PROJECT_NAME}
+)         
 ament_package()

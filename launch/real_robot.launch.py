@@ -151,7 +151,7 @@ def generate_launch_description():
                 parameters=[
                     {"i2c_address": 0x69},
                     {"frame_id": "base_link"},
-                    {"pub_rate": 30},
+                    {"pub_rate": 50},
                 ],
             )
 
