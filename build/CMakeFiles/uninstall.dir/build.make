@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/admin1/innovix2/src/curio_one
+CMAKE_SOURCE_DIR = /home/jetson/ros2_ws/src/curio_one
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/admin1/innovix2/src/curio_one/build
+CMAKE_BINARY_DIR = /home/jetson/ros2_ws/src/curio_one/build
 
 # Utility rule file for uninstall.
 
@@ -67,6 +67,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/admin1/innovix2/src/curio_one/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/admin1/innovix2/src/curio_one /home/admin1/innovix2/src/curio_one /home/admin1/innovix2/src/curio_one/build /home/admin1/innovix2/src/curio_one/build /home/admin1/innovix2/src/curio_one/build/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jetson/ros2_ws/src/curio_one/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jetson/ros2_ws/src/curio_one /home/jetson/ros2_ws/src/curio_one /home/jetson/ros2_ws/src/curio_one/build /home/jetson/ros2_ws/src/curio_one/build /home/jetson/ros2_ws/src/curio_one/build/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 

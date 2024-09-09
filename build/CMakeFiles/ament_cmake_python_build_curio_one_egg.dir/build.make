@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/admin1/innovix2/src/curio_one
+CMAKE_SOURCE_DIR = /home/jetson/ros2_ws/src/curio_one
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/admin1/innovix2/src/curio_one/build
+CMAKE_BINARY_DIR = /home/jetson/ros2_ws/src/curio_one/build
 
 # Utility rule file for ament_cmake_python_build_curio_one_egg.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/admin1/innovix2/src/curio_one/build
 include CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/progress.make
 
 CMakeFiles/ament_cmake_python_build_curio_one_egg:
-	cd /home/admin1/innovix2/src/curio_one/build/ament_cmake_python/curio_one && /usr/bin/python3 setup.py egg_info
+	cd /home/jetson/ros2_ws/src/curio_one/build/ament_cmake_python/curio_one && /usr/bin/python3 setup.py egg_info
 
 ament_cmake_python_build_curio_one_egg: CMakeFiles/ament_cmake_python_build_curio_one_egg
 ament_cmake_python_build_curio_one_egg: CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/clean:
 .PHONY : CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/clean
 
 CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/depend:
-	cd /home/admin1/innovix2/src/curio_one/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/admin1/innovix2/src/curio_one /home/admin1/innovix2/src/curio_one /home/admin1/innovix2/src/curio_one/build /home/admin1/innovix2/src/curio_one/build /home/admin1/innovix2/src/curio_one/build/CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/jetson/ros2_ws/src/curio_one/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/jetson/ros2_ws/src/curio_one /home/jetson/ros2_ws/src/curio_one /home/jetson/ros2_ws/src/curio_one/build /home/jetson/ros2_ws/src/curio_one/build /home/jetson/ros2_ws/src/curio_one/build/CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ament_cmake_python_build_curio_one_egg.dir/depend
 

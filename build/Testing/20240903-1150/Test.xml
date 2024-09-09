@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20240903-1150-Experimental"
+	Name="nano"
+	Generator="ctest-3.16.3"
+	CompilerName="/usr/bin/c++"
+	CompilerVersion="9.4.0"
+	OSName="Linux"
+	Hostname="nano"
+	OSRelease="4.9.253-tegra"
+	OSVersion="#1 SMP PREEMPT Mon Jul 26 12:13:06 PDT 2021"
+	OSPlatform="aarch64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="8"
+	ModelID="0"
+	ProcessorCacheSize="0"
+	NumberOfLogicalCPU="4"
+	NumberOfPhysicalCPU="1"
+	TotalVirtualMemory="1978"
+	TotalPhysicalMemory="3956"
+	LogicalProcessorsPerPhysical="4"
+	ProcessorClockFrequency="0"
+	>
+	<Testing>
+		<StartDateTime>Sep 03 14:09 CEST</StartDateTime>
+		<StartTestTime>1725365357</StartTestTime>
+		<TestList/>
+		<EndDateTime>Sep 03 14:09 CEST</EndDateTime>
+		<EndTestTime>1725365357</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

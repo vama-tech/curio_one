@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/admin1/innovix2/src/curio_one/include/curio_system.cpp" "/home/admin1/innovix2/src/curio_one/build/CMakeFiles/curio_one.dir/include/curio_system.cpp.o"
+  "/home/jetson/ros2_ws/src/curio_one/include/curio_system.cpp" "/home/jetson/ros2_ws/src/curio_one/build/CMakeFiles/curio_one.dir/include/curio_system.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

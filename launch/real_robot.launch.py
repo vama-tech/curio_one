@@ -23,6 +23,12 @@ def generate_launch_description():
                     get_package_share_directory(package_name),'launch','rsp.launch.py'
                 )])
     )
+
+    camera_detection = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(
+                get_package_share_directory(package_name),'launch','cameradetection.launch.py'
+            )])
+)
     
 
     twist_mux_params = os.path.join(get_package_share_directory(package_name),'config','twist_mux.yaml')
@@ -170,6 +176,7 @@ def generate_launch_description():
         imu,
         madgwick,
         ekf_config,
+        # camera_detection
         # delayed_lidar
 
     ])

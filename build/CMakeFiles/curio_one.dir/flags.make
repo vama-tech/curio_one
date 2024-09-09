@@ -6,5 +6,5 @@ CXX_FLAGS = -g -fPIC   -Wall -Wextra -Wpedantic -std=gnu++17
 
 CXX_DEFINES = -DCURIO_ONE_BUILDING_DLL -DDEFAULT_RMW_IMPLEMENTATION=rmw_cyclonedds_cpp -DRCUTILS_ENABLE_FAULT_INJECTION -Dcurio_one_EXPORTS
 
-CXX_INCLUDES = -I/home/admin1/innovix2/src/curio_one/include -isystem /opt/ros/galactic/include 
+CXX_INCLUDES = -I/home/jetson/ros2_ws/src/curio_one/include -isystem /opt/ros/galactic/include 
 

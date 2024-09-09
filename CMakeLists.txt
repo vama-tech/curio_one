@@ -124,5 +124,19 @@ install(PROGRAMS scripts/nav_recovery.py
 )
 install(PROGRAMS scripts/yolo.py
        DESTINATION lib/${PROJECT_NAME}
-)         
+)   
+install(PROGRAMS scripts/nav_test.py
+       DESTINATION lib/${PROJECT_NAME}
+)  
+install(PROGRAMS scripts/nav2_test_way.py
+       DESTINATION lib/${PROJECT_NAME}
+)   
+
+install(PROGRAMS 
+       scripts/wakeonfacedetect.py
+       scripts/facedetect2.py
+       DESTINATION lib/${PROJECT_NAME}
+)  
+
+
 ament_package()

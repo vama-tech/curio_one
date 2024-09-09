@@ -20,10 +20,10 @@ ekf_filter_node:
     #vroll , vpitch, vyaw,
     #ax    , ay    , az
     odom0: odom
-    odom0_config: [true, true, true,
-                   true, true, true,
-                   true,  true,  true,
+    odom0_config: [true, true, false,
                    false, false, false,
+                   false,  false,  false,
+                   false, false, true,
                    false, false, false]
     odom0_queue_size: 10
     odom0_nodelay: true
@@ -31,7 +31,7 @@ ekf_filter_node:
     odom0_relative: false
 
     imu0: imu/data
-    imu0_config: [false, false, false,
+    imu0_config: [false, false, true,
                   false, false, false,
                   false, false, false,
                   false, false, true,
@@ -41,6 +41,7 @@ ekf_filter_node:
     imu0_relative: true
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
+
 
     #                          X      Y       Z       R       P       Y       Vx      Vy        Vz      Vr      Vp      Vy      ax      ay      az   
     # process_noise_covariance: [0.05, 0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
