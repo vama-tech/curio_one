@@ -25,7 +25,7 @@ LibSerial::BaudRate convert_baud_rate(int baud_rate)
     case 230400: return LibSerial::BaudRate::BAUD_230400;
     default:
       std::cout << "Error! Baud rate " << baud_rate << " not supported! Default to 57600" << std::endl;
-      return LibSerial::BaudRate::BAUD_57600;
+      return LibSerial::BaudRate::BAUD_57600;  //BAUD_RATE
   }
 }
 
@@ -123,6 +123,24 @@ public:
 
     val_6 = std::atof(token_6.c_str());
   }
+
+  void read_up_sensor_values(double &val_7, double &val_8, double &val_9)
+  {
+      std::string response = send_msg("E\r");
+
+      std::string delired = " ";  
+      size_t del_red = response.find(delired);
+      std::string token_7 = response.substr(0, del_red);
+      
+      size_t del_red_2 = response.find_last_of(delired); // Find the last occurrence of the delimiter
+      std::string token_8 = response.substr(del_red + delired.length(), del_red_2 - del_red - delired.length());
+      std::string token_9 = response.substr(del_red_2 + delired.length());  // Start from the position after the last delimiter
+      
+      val_7 = std::atof(token_7.c_str());
+      val_8 = std::atof(token_8.c_str());
+      val_9 = std::atof(token_9.c_str());
+  }
+  
   void set_motor_values(int val_1, int val_2)
   {
     std::stringstream ss;

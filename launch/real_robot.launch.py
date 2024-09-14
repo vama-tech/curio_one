@@ -96,7 +96,7 @@ def generate_launch_description():
             PythonLaunchDescriptionSource([os.path.join(
                 get_package_share_directory(package_name),'launch','joystick.launch.py'
             )])
-)
+    )
     range_file = Node(
         package =package_name,
         executable="range.py",
@@ -115,6 +115,8 @@ def generate_launch_description():
         package =package_name,
         executable="battery_stat.py",
     )
+
+    
     delayed_joystick = RegisterEventHandler(
     event_handler=OnProcessStart(
         target_action=controller_manager,
@@ -133,13 +135,19 @@ def generate_launch_description():
 
     config_dir = os.path.join(get_package_share_directory(package_name), 'config')
 
-    madgwick = Node(
-                package='imu_filter_madgwick',
-                executable='imu_filter_madgwick_node',
-                name='imu_filter',
-                output='screen',
-                parameters=[os.path.join(config_dir, 'imu_filter.yaml')],
-            )
+    bno055 = Node(
+                package='bno055',
+                executable='bno055',
+                parameters=[os.path.join(config_dir, 'bno055_params_i2c.yaml')]
+
+    )
+    # madgwick = Node(
+    #             package='imu_filter_madgwick',
+    #             executable='imu_filter_madgwick_node',
+    #             name='imu_filter',
+    #             output='screen',
+    #             parameters=[os.path.join(config_dir, 'imu_filter.yaml')],
+    #         )
     imu_params_file = os.path.join(get_package_share_directory(package_name),'config','ekf.yaml')
     ekf_config = Node(
                 package='robot_localization',
@@ -150,16 +158,16 @@ def generate_launch_description():
                 remappings=[("odom", LaunchConfiguration('odom_topic', default='/odom'))]
 
             )
-    imu = Node(
-                package="ros2_icm20948",
-                executable="icm20948_node",
-                name="icm20948_node",
-                parameters=[
-                    {"i2c_address": 0x69},
-                    {"frame_id": "base_link"},
-                    {"pub_rate": 50},
-                ],
-            )
+    # imu = Node(
+    #             package="ros2_icm20948",
+    #             executable="icm20948_node",
+    #             name="icm20948_node",
+    #             parameters=[
+    #                 {"i2c_address": 0x69},
+    #                 {"frame_id": "base_link"},
+    #                 {"pub_rate": 50},
+    #             ],
+    #         )
 
     return LaunchDescription([
         rsp,
@@ -173,8 +181,9 @@ def generate_launch_description():
         range1_file,
         range2_file,
         battery_file,
-        imu,
-        madgwick,
+        bno055,
+        # imu,
+        # madgwick,
         ekf_config,
         # camera_detection
         # delayed_lidar

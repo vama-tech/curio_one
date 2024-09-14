@@ -44,6 +44,11 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
         cfg_.sensor_name = sensor.name;
         cfg_.sensor1_name = sensor.name + "_1";  // Unique name for first additional sensor
         cfg_.sensor2_name = sensor.name + "_2";  // Unique name for second additional sensor
+        cfg_.sensor4_name = sensor.name + "_4";  // Unique name for third additional sensor
+        cfg_.sensor5_name = sensor.name + "_5";  // Unique name for fouth additional sensor
+        cfg_.sensor6_name = sensor.name + "_6";  // Unique name for fifth additional sensor
+
+
     } else {
         // Handle the case when no sensors are available
         RCLCPP_ERROR(rclcpp::get_logger("CurioBotSystemHardware"), "No sensors available!");
@@ -53,6 +58,11 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
     sensor_n_.setup(cfg_.sensor_name);
     sensor_l_.setup(cfg_.sensor1_name);
     sensor_r_.setup(cfg_.sensor2_name);
+
+    sensor_n1_.setup(cfg_.sensor4_name);
+    sensor_l1_.setup(cfg_.sensor5_name);
+    sensor_r1_.setup(cfg_.sensor6_name);
+
 
     for (const hardware_interface::ComponentInfo & joint : info_.joints)
     {
@@ -114,11 +124,11 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
 
     for (const hardware_interface::ComponentInfo & sensors : info_.sensors)
     {
-        if (sensors.state_interfaces.size() != 3)
+        if (sensors.state_interfaces.size() != 6)
         {
             RCLCPP_FATAL(
                 rclcpp::get_logger("CurioBotSystemHardware"),
-                "Joint '%s' has %zu state interface. 3 expected.", sensors.name.c_str(),
+                "Joint '%s' has %zu state interface. 6 expected.", sensors.name.c_str(),
                 sensors.state_interfaces.size());
             return CallbackReturn::ERROR;
         }
@@ -153,6 +163,35 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
             return CallbackReturn::ERROR;
         }
 
+        if (sensors.state_interfaces[3].name != "Sensor4")
+        {
+            RCLCPP_FATAL(
+                rclcpp::get_logger("CurioBotSystemHardware"),
+                "Joint '%s' have '%s' as second state interface. '%s' expected.", sensors.name.c_str(),
+                sensors.state_interfaces[3].name.c_str(), "Sensor4");
+
+            return CallbackReturn::ERROR;
+        }
+
+        if (sensors.state_interfaces[4].name != "Sensor5")
+        {
+            RCLCPP_FATAL(
+                rclcpp::get_logger("CurioBotSystemHardware"),
+                "Joint '%s' have '%s' as third   state interface. '%s' expected.", sensors.name.c_str(),
+                sensors.state_interfaces[4].name.c_str(), "Sensor5");
+
+            return CallbackReturn::ERROR;
+        }
+
+        if (sensors.state_interfaces[5].name != "Sensor6")
+        {
+            RCLCPP_FATAL(
+                rclcpp::get_logger("CurioBotSystemHardware"),
+                "Joint '%s' have '%s' as third   state interface. '%s' expected.", sensors.name.c_str(),
+                sensors.state_interfaces[5].name.c_str(), "Sensor6");
+
+            return CallbackReturn::ERROR;
+        }
         // if (joint.state_interfaces[2].name != hardware_interface::HW_IF_EFFORT)
         // {
         //   RCLCPP_FATAL(
@@ -188,6 +227,13 @@ std::vector<hardware_interface::StateInterface> CurioBotSystemHardware::export_s
         "tof_joint", "Sensor1", &sensor_l_.reading));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         "tof_joint", "Sensor2", &sensor_r_.reading));
+
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "tof_joint", "Sensor4", &sensor_n1_.reading));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "tof_joint", "Sensor5", &sensor_l1_.reading));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "tof_joint", "Sensor6", &sensor_r1_.reading));
 
     // Export state interface for the battery
     state_interfaces.emplace_back(hardware_interface::StateInterface(
@@ -249,6 +295,7 @@ hardware_interface::return_type CurioBotSystemHardware::read()
 
     // Read data from TOF sensor
     comms_.read_sensor_values(sensor_n_.reading, sensor_l_.reading, sensor_r_.reading);
+    comms_.read_up_sensor_values(sensor_n1_.reading, sensor_l1_.reading, sensor_r1_.reading);
 
     //Read Volstge Data from Battery
     double battery_voltage;
