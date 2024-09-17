@@ -10,6 +10,24 @@
     <xacro:property name="chassis_width" value="0.380"/>
     <xacro:property name="chassis_height" value="0.140"/>
     <xacro:property name="chassis_mass" value="1.0"/>
+
+    <!-- EXTURSION PARAMETERS -->
+    <xacro:property name="ext_length" value="0.070"/>
+    <xacro:property name="ext_width" value="0.080"/>
+    <xacro:property name="ext_height" value="0.480"/>
+    <xacro:property name="ext_mass" value="0.5"/>
+
+    <!-- TOF_TABLE PARAMETERS -->
+    <xacro:property name="tt_length" value="0.370"/>
+    <xacro:property name="tt_width" value="0.380"/>
+    <xacro:property name="tt_height" value="0.020"/>
+    <xacro:property name="tt_mass" value="0.02"/>
+    
+    <!-- HMI PARAMETERS -->
+    <xacro:property name="hmi_length" value="0.370"/>
+    <xacro:property name="hmi_width" value="0.380"/>
+    <xacro:property name="hmi_height" value="0.050"/>
+    <xacro:property name="hmi_mass" value="0.5"/>
     
     <!-- OFFSET PARAMETERS -->
     <xacro:property name="wheel_offset_x" value="0.285"/>
@@ -88,7 +106,7 @@
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link"/>
         <child link="chassis"/>
-        <origin xyz="0 0 ${-wheel_offset_z}" rpy="0 0 0"/>
+        <origin xyz="0 0 ${-wheel_offset_z}"/>
     </joint>
 
 
@@ -124,6 +142,120 @@
         <material>Gazebo/Silver</material>
     </gazebo>
 
+    <!-- ======================================================================================= -->
+    <!-- EXTURSION JOINT -->
+    <joint name="ext_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="ext_link"/>
+        <origin xyz="0 0 ${chassis_height}"/>
+    </joint>
+
+    <!-- EXTURSION LINK -->
+    <link name="ext_link">
+        <!-- VISUAL -->
+        <visual>
+            <origin xyz="0 0 0.200"/>
+            <geometry>
+                <box size="${ext_length} ${ext_width} ${ext_height}"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        
+        <!-- COLLISION -->
+        <collision>
+            <origin xyz="0 0 ${ext_height}"/>
+            <geometry>
+                <box size="${ext_length} ${ext_width} ${ext_height}"/>
+            </geometry>
+        </collision>
+        
+        <!-- INERTIA -->
+        <xacro:inertial_box mass="${ext_mass}" x="${ext_length}" y="${ext_width}" z="${ext_height}">
+            <origin xyz="0 0 ${ext_height/2}" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- GAZEBO EXTURSION -->
+    <gazebo reference="ext_link">
+        <material>Gazebo/Silver</material>
+    </gazebo>
+
+    <!-- ======================================================================================= -->
+    <!-- TOF_TABLE JOINT -->
+    <joint name="tt_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="tt_link"/>
+        <origin xyz="0 0 ${chassis_height}"/>
+    </joint>
+
+    <!-- TOF_TABLE LINK -->
+    <link name="tt_link">
+        <!-- VISUAL -->
+        <visual>
+            <origin xyz="0 0 0.02"/>
+            <geometry>
+                <box size="${tt_length} ${tt_width} ${tt_height}"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        
+        <!-- COLLISION -->
+        <collision>
+            <origin xyz="0 0 ${tt_height}"/>
+            <geometry>
+                <box size="${tt_length} ${tt_width} ${tt_height}"/>
+            </geometry>
+        </collision>
+        
+        <!-- INERTIA -->
+        <xacro:inertial_box mass="${tt_mass}" x="${tt_length}" y="${tt_width}" z="${tt_height}">
+            <origin xyz="0 0 ${tt_height/2}" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+    <!-- GAZEBO TOF_TABLE-->
+    <gazebo reference="tt_link">
+        <material>Gazebo/Silver</material>
+    </gazebo>
+
+    <!-- ======================================================================================= -->
+    <!-- HMI JOINT -->
+    <joint name="hmi_joint" type="fixed">
+        <parent link="chassis"/>
+        <child link="hmi_link"/>
+        <origin xyz="0 0 ${chassis_height}"/>
+    </joint>
+
+    <!-- HMI LINK -->
+    <link name="hmi_link">
+        <!-- VISUAL -->
+        <visual>
+            <origin xyz="0 0 0.425"/>
+            <geometry>
+                <box size="${hmi_length} ${hmi_width} ${hmi_height}"/>
+            </geometry>
+            <material name="silver"/>
+        </visual>
+        
+        <!-- COLLISION -->
+        <collision>
+            <origin xyz="0 0 ${hmi_height}"/>
+            <geometry>
+                <box size="${hmi_length} ${hmi_width} ${hmi_height}"/>
+            </geometry>
+        </collision>
+        
+        <!-- INERTIA -->
+        <xacro:inertial_box mass="${hmi_mass}" x="${hmi_length}" y="${hmi_width}" z="${hmi_height}">
+            <origin xyz="0 0 ${hmi_height/2}" rpy="0 0 0"/>
+        </xacro:inertial_box>
+    </link>
+
+
+    <!-- GAZEBO HMI -->
+    <gazebo reference="hmi_link">
+        <material>Gazebo/Silver</material>
+    </gazebo>
     <!-- ================================================================================== -->
 
 

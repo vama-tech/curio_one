@@ -52,11 +52,11 @@ class SensorPublisher(Node):
                 transform.header.frame_id = 'chassis'  # Set appropriate parent frame
                 transform.child_frame_id = 'tof_joint_5'  # Set appropriate child frame
                 transform.transform.translation.x = 0.192  # Set appropriate translation
-                transform.transform.translation.y = 0.148
-                transform.transform.translation.z = 0.06
+                transform.transform.translation.y = 0.0
+                transform.transform.translation.z = 0.560
                 transform.transform.rotation.x = 0.0  # Set appropriate rotation
                 transform.transform.rotation.y = 0.0
-                transform.transform.rotation.z = 0.784
+                transform.transform.rotation.z = 0.0
                 transform.transform.rotation.w = 1.0
                 self.tf_broadcaster.sendTransform(transform)
 

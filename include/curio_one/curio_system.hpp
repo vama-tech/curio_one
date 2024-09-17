@@ -55,6 +55,8 @@ class CurioBotSystemHardware : public hardware_interface::SystemInterface
   std::string sensor4_name = "";
   std::string sensor5_name = "";
   std::string sensor6_name = "";
+  std::string sensor7_name = "";
+  std::string sensor8_name = "";
 
   std::string battery_name;
   double reading;
@@ -96,6 +98,8 @@ private:
   Sensors sensor_n1_;
   Sensors sensor_l1_;
   Sensors sensor_r1_;
+  Sensors sensor_l2_;
+  Sensors sensor_r2_;
   Battery battery_;
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_;
   rclcpp::Node::SharedPtr node_;

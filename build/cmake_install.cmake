@@ -110,6 +110,26 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/4_range.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/5_range.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/6_range.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/7_range.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/8_range.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/battery_stat.py")
 endif()
 
@@ -163,6 +183,18 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/nav_test.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES "/home/jetson/ros2_ws/src/curio_one/scripts/nav2_test_way.py")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/curio_one" TYPE PROGRAM FILES
+    "/home/jetson/ros2_ws/src/curio_one/scripts/wakeonfacedetect.py"
+    "/home/jetson/ros2_ws/src/curio_one/scripts/facedetect2.py"
+    "/home/jetson/ros2_ws/src/curio_one/scripts/wakeandchatfinal.py"
+    )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)

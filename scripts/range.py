@@ -53,7 +53,7 @@ class SensorPublisher(Node):
                 transform.child_frame_id = 'tof_joint'  # Set appropriate child frame
                 transform.transform.translation.x = 0.192  # Set appropriate translation
                 transform.transform.translation.y = 0.0
-                transform.transform.translation.z = 0.06
+                transform.transform.translation.z = 0.15
                 transform.transform.rotation.x = 0.0  # Set appropriate rotation
                 transform.transform.rotation.y = 0.0
                 transform.transform.rotation.z = 0.0

@@ -12,7 +12,7 @@ class SensorPublisher(Node):
     def __init__(self):
         super().__init__('sensor_publisher')
         self.get_logger().info("Started LaserScan Node")
-        self.publisher_ = self.create_publisher(LaserScan, '/range_4', 10)
+        self.publisher_ = self.create_publisher(LaserScan, '/range_7', 10)
         self.subscription_ = self.create_subscription(
             DynamicJointState,
             '/dynamic_joint_states',
@@ -23,11 +23,11 @@ class SensorPublisher(Node):
 
     def dynamic_joint_states_callback(self, msg):
         for interface_value in msg.interface_values:
-            if 'Sensor4' in interface_value.interface_names:
-                sensor_value = interface_value.values[3]  # Assuming only one value for simplicity
+            if 'Sensor7' in interface_value.interface_names:
+                sensor_value = interface_value.values[5]  # Assuming only one value for simplicity
                 scan_msg = LaserScan()
                 scan_msg.header.stamp = self.get_clock().now().to_msg()
-                scan_msg.header.frame_id = 'tof_4'  # Set appropriate frame ID
+                scan_msg.header.frame_id = 'tof_7'  # Set appropriate frame ID
                 scan_msg.angle_min = -1.57  # Set appropriate min angle (e.g., -90 degrees)
                 scan_msg.angle_max = 1.57  # Set appropriate max angle (e.g., 90 degrees)
                 scan_msg.angle_increment = 3.14 / 90  # Set appropriate angle increment (e.g., 1 degree)
@@ -50,13 +50,13 @@ class SensorPublisher(Node):
                 transform = TransformStamped()
                 transform.header.stamp = self.get_clock().now().to_msg()
                 transform.header.frame_id = 'chassis'  # Set appropriate parent frame
-                transform.child_frame_id = 'tof_joint_4'  # Set appropriate child frame
+                transform.child_frame_id = 'tof_joint_7'  # Set appropriate child frame
                 transform.transform.translation.x = 0.192  # Set appropriate translation
-                transform.transform.translation.y = 0.120
-                transform.transform.translation.z = 0.580
+                transform.transform.translation.y = -0.200
+                transform.transform.translation.z = 0.06
                 transform.transform.rotation.x = 0.0  # Set appropriate rotation
                 transform.transform.rotation.y = 0.0
-                transform.transform.rotation.z = 0.0
+                transform.transform.rotation.z = -0.523599
                 transform.transform.rotation.w = 1.0
                 self.tf_broadcaster.sendTransform(transform)
 

@@ -47,7 +47,8 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
         cfg_.sensor4_name = sensor.name + "_4";  // Unique name for third additional sensor
         cfg_.sensor5_name = sensor.name + "_5";  // Unique name for fouth additional sensor
         cfg_.sensor6_name = sensor.name + "_6";  // Unique name for fifth additional sensor
-
+        cfg_.sensor7_name = sensor.name + "_7";  // Unique name for sixth additional sensor
+        cfg_.sensor8_name = sensor.name + "_8";  // Unique name for seventh additional sensor
 
     } else {
         // Handle the case when no sensors are available
@@ -62,6 +63,9 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
     sensor_n1_.setup(cfg_.sensor4_name);
     sensor_l1_.setup(cfg_.sensor5_name);
     sensor_r1_.setup(cfg_.sensor6_name);
+
+    sensor_l2_.setup(cfg_.sensor7_name);
+    sensor_r2_.setup(cfg_.sensor8_name);
 
 
     for (const hardware_interface::ComponentInfo & joint : info_.joints)
@@ -124,11 +128,11 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
 
     for (const hardware_interface::ComponentInfo & sensors : info_.sensors)
     {
-        if (sensors.state_interfaces.size() != 6)
+        if (sensors.state_interfaces.size() != 8)
         {
             RCLCPP_FATAL(
                 rclcpp::get_logger("CurioBotSystemHardware"),
-                "Joint '%s' has %zu state interface. 6 expected.", sensors.name.c_str(),
+                "Joint '%s' has %zu state interface. 8 expected.", sensors.name.c_str(),
                 sensors.state_interfaces.size());
             return CallbackReturn::ERROR;
         }
@@ -157,7 +161,7 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
         {
             RCLCPP_FATAL(
                 rclcpp::get_logger("CurioBotSystemHardware"),
-                "Joint '%s' have '%s' as third   state interface. '%s' expected.", sensors.name.c_str(),
+                "Joint '%s' have '%s' as third state interface. '%s' expected.", sensors.name.c_str(),
                 sensors.state_interfaces[2].name.c_str(), "Sensor2");
 
             return CallbackReturn::ERROR;
@@ -167,7 +171,7 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
         {
             RCLCPP_FATAL(
                 rclcpp::get_logger("CurioBotSystemHardware"),
-                "Joint '%s' have '%s' as second state interface. '%s' expected.", sensors.name.c_str(),
+                "Joint '%s' have '%s' as fourth state interface. '%s' expected.", sensors.name.c_str(),
                 sensors.state_interfaces[3].name.c_str(), "Sensor4");
 
             return CallbackReturn::ERROR;
@@ -177,7 +181,7 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
         {
             RCLCPP_FATAL(
                 rclcpp::get_logger("CurioBotSystemHardware"),
-                "Joint '%s' have '%s' as third   state interface. '%s' expected.", sensors.name.c_str(),
+                "Joint '%s' have '%s' as fifth state interface. '%s' expected.", sensors.name.c_str(),
                 sensors.state_interfaces[4].name.c_str(), "Sensor5");
 
             return CallbackReturn::ERROR;
@@ -187,8 +191,28 @@ CallbackReturn CurioBotSystemHardware::on_init(const hardware_interface::Hardwar
         {
             RCLCPP_FATAL(
                 rclcpp::get_logger("CurioBotSystemHardware"),
-                "Joint '%s' have '%s' as third   state interface. '%s' expected.", sensors.name.c_str(),
+                "Joint '%s' have '%s' as sixth state interface. '%s' expected.", sensors.name.c_str(),
                 sensors.state_interfaces[5].name.c_str(), "Sensor6");
+
+            return CallbackReturn::ERROR;
+        }
+
+        if (sensors.state_interfaces[6].name != "Sensor7")
+        {
+            RCLCPP_FATAL(
+                rclcpp::get_logger("CurioBotSystemHardware"),
+                "Joint '%s' have '%s' as seventh state interface. '%s' expected.", sensors.name.c_str(),
+                sensors.state_interfaces[6].name.c_str(), "Sensor7");
+
+            return CallbackReturn::ERROR;
+        }
+
+        if (sensors.state_interfaces[7].name != "Sensor8")
+        {
+            RCLCPP_FATAL(
+                rclcpp::get_logger("CurioBotSystemHardware"),
+                "Joint '%s' have '%s' as eight state interface. '%s' expected.", sensors.name.c_str(),
+                sensors.state_interfaces[7].name.c_str(), "Sensor8");
 
             return CallbackReturn::ERROR;
         }
@@ -234,6 +258,10 @@ std::vector<hardware_interface::StateInterface> CurioBotSystemHardware::export_s
         "tof_joint", "Sensor5", &sensor_l1_.reading));
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         "tof_joint", "Sensor6", &sensor_r1_.reading));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "tof_joint", "Sensor7", &sensor_l2_.reading));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        "tof_joint", "Sensor8", &sensor_r2_.reading));
 
     // Export state interface for the battery
     state_interfaces.emplace_back(hardware_interface::StateInterface(
@@ -296,6 +324,7 @@ hardware_interface::return_type CurioBotSystemHardware::read()
     // Read data from TOF sensor
     comms_.read_sensor_values(sensor_n_.reading, sensor_l_.reading, sensor_r_.reading);
     comms_.read_up_sensor_values(sensor_n1_.reading, sensor_l1_.reading, sensor_r1_.reading);
+    comms_.read_down_sensor_values(sensor_l2_.reading, sensor_r2_.reading);
 
     //Read Volstge Data from Battery
     double battery_voltage;

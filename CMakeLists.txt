@@ -95,6 +95,12 @@ install(PROGRAMS scripts/5_range.py
 install(PROGRAMS scripts/6_range.py
        DESTINATION lib/${PROJECT_NAME}
 )
+install(PROGRAMS scripts/7_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/8_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
 install(PROGRAMS scripts/battery_stat.py
        DESTINATION lib/${PROJECT_NAME}
 )
@@ -144,6 +150,7 @@ install(PROGRAMS scripts/nav2_test_way.py
 install(PROGRAMS 
        scripts/wakeonfacedetect.py
        scripts/facedetect2.py
+       scripts/wakeandchatfinal.py
        DESTINATION lib/${PROJECT_NAME}
 )  
 

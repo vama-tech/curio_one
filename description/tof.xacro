@@ -34,7 +34,7 @@
     <joint name="tof_joint" type="fixed">
         <parent link="chassis"/>
         <child link="tof"/>
-        <origin xyz="0.192 0.0 0.06" rpy="0 0 0"/>
+        <origin xyz="0.192 0.0 0.16" rpy="0 0 0"/>
     </joint>
 
     <link name="tof_1">
@@ -58,7 +58,7 @@
     <joint name="tof_joint_1" type="fixed">
         <parent link="chassis"/>
         <child link="tof_1"/>
-        <origin xyz="0.192 -0.200 0.06" rpy="0 0 -0.523599"/>
+        <origin xyz="0.192 -0.200 0.16" rpy="0 0 -0.523599"/>
     </joint>
 
     <link name="tof_2">
@@ -82,7 +82,7 @@
     <joint name="tof_joint_2" type="fixed">
         <parent link="chassis"/>
         <child link="tof_2"/>
-        <origin xyz="0.192 0.200 0.06" rpy="0 0 0.523599"/>
+        <origin xyz="0.192 0.200 0.16" rpy="0 0 0.523599"/>
     </joint>
 
 <!-- ============================================UPPER TOF SENSOR==================================================== -->
@@ -157,7 +157,7 @@
         <origin xyz="0.192 -0.120 0.580" rpy="0 0 0"/>
     </joint>
 
-    <!-- ======================================LOWER DOWN SENSOR=============================================== -->
+<!-- ======================================LOWER DOWN SENSOR=============================================== -->
     <link name="tof_7">
         <visual>
             <geometry>
@@ -464,4 +464,4 @@
             </plugin>
         </sensor>
     </gazebo>
-</robot>
+</robot>    
