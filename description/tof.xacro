@@ -58,7 +58,7 @@
     <joint name="tof_joint_1" type="fixed">
         <parent link="chassis"/>
         <child link="tof_1"/>
-        <origin xyz="0.192 0.148 0.06" rpy="0 0 0.523599"/>
+        <origin xyz="0.192 -0.200 0.06" rpy="0 0 -0.523599"/>
     </joint>
 
     <link name="tof_2">
@@ -82,10 +82,10 @@
     <joint name="tof_joint_2" type="fixed">
         <parent link="chassis"/>
         <child link="tof_2"/>
-        <origin xyz="0.192 -0.148 0.06" rpy="0 0 -0.523599"/>
+        <origin xyz="0.192 0.200 0.06" rpy="0 0 0.523599"/>
     </joint>
 
-<!-- ======================================================================== -->
+<!-- ============================================UPPER TOF SENSOR==================================================== -->
     <link name="tof_4">
         <visual>
             <geometry>
@@ -157,8 +157,58 @@
         <origin xyz="0.192 -0.120 0.580" rpy="0 0 0"/>
     </joint>
 
+    <!-- ======================================LOWER DOWN SENSOR=============================================== -->
+    <link name="tof_7">
+        <visual>
+            <geometry>
+                <cylinder radius="0.01" length="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.01" length="0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="0.01" length="0.01" radius="0.01">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
 
-<!-- ==================================================== -->
+
+    
+    <joint name="tof_joint_7" type="fixed">
+        <parent link="chassis"/>
+        <child link="tof_7"/>
+        <origin xyz="0.192 -0.200 0.06" rpy="0 0 -0.523599"/>
+    </joint>
+
+    <link name="tof_8">
+        <visual>
+            <geometry>
+                <cylinder radius="0.01" length="0.01"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.01" length="0.01"/>
+            </geometry>
+        </collision>
+        <xacro:inertial_cylinder mass="0.01" length="0.01" radius="0.01">
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </xacro:inertial_cylinder>
+    </link>
+
+    
+    <joint name="tof_joint_8" type="fixed">
+        <parent link="chassis"/>
+        <child link="tof_8"/>
+        <origin xyz="0.192 0.200 0.06" rpy="0 0 0.523599"/>
+    </joint>
+
+
+<!-- =================================================================GAZEBO===================================================== -->
     <gazebo reference="tof">
         <material>Gazebo/Red</material>
         <sensor name="tof" type="ray">
@@ -218,7 +268,7 @@
                   <remapping>~/out:=range_1</remapping>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>tof_1</frame_name>
+              <frame_name>tof</frame_name>
             </plugin>
         </sensor> 
     </gazebo>
@@ -250,7 +300,7 @@
                 <remapping>~/out:=range_2</remapping>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>tof_2</frame_name>
+              <frame_name>tof</frame_name>
             </plugin>
         </sensor> 
     </gazebo>
@@ -282,7 +332,7 @@
                 <remapping>~/out:=range_4</remapping>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>tof_4</frame_name>
+              <frame_name>tof</frame_name>
             </plugin>
         </sensor>
     </gazebo>
@@ -314,7 +364,7 @@
                 <remapping>~/out:=range_5</remapping>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>tof_5</frame_name>
+              <frame_name>tof</frame_name>
             </plugin>
         </sensor>
     </gazebo>
@@ -346,7 +396,71 @@
                 <remapping>~/out:=range_6</remapping>
               </ros>
               <output_type>sensor_msgs/LaserScan</output_type>
-              <frame_name>tof_6</frame_name>
+              <frame_name>tof</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="tof_7">
+        <material>Gazebo/Red</material>
+        <sensor name="tof_7" type="ray">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <pose>0.192 0 0.06 0 0 0</pose>
+            <update_rate>10</update_rate>
+            <ray>
+              <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1.00</resolution>
+                        <min_angle>-0.01</min_angle>
+                        <max_angle>0.01</max_angle>
+                    </horizontal>
+              </scan>
+              <range>
+                    <min>0.04</min>
+                    <max>12</max>
+              </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+              <ros>
+                  <namespace>distance</namespace>
+                <remapping>~/out:=range_7</remapping>
+              </ros>
+              <output_type>sensor_msgs/LaserScan</output_type>
+              <frame_name>tof</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <gazebo reference="tof_8">
+        <material>Gazebo/Red</material>
+        <sensor name="tof_8" type="ray">
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <pose>0.192 0 0.06 0 0 0</pose>
+            <update_rate>10</update_rate>
+            <ray>
+              <scan>
+                    <horizontal>
+                        <samples>5</samples>
+                        <resolution>1.00</resolution>
+                        <min_angle>-0.01</min_angle>
+                        <max_angle>0.01</max_angle>
+                    </horizontal>
+              </scan>
+              <range>
+                    <min>0.04</min>
+                    <max>12</max>
+              </range>
+            </ray>
+            <plugin name="laser_controller" filename="libgazebo_ros_ray_sensor.so">
+              <ros>
+                  <namespace>distance</namespace>
+                <remapping>~/out:=range_8</remapping>
+              </ros>
+              <output_type>sensor_msgs/LaserScan</output_type>
+              <frame_name>tof</frame_name>
             </plugin>
         </sensor>
     </gazebo>

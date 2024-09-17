@@ -141,6 +141,21 @@ public:
       val_9 = std::atof(token_9.c_str());
   }
   
+  void read_down_sensor_values(double &val_10, double &val_11)
+  {
+      std::string response = send_msg("F\r");
+
+      std::string delired = " ";  
+      size_t del_red = response.find(delired);
+      std::string token_7 = response.substr(0, del_red);
+      
+      size_t del_red_2 = response.find_last_of(delired); // Find the last occurrence of the delimiter
+      std::string token_8 = response.substr(del_red + delired.length(), del_red_2 - del_red - delired.length());
+      std::string token_9 = response.substr(del_red_2 + delired.length());  // Start from the position after the last delimiter
+      
+      val_10 = std::atof(token_10.c_str());
+      val_11 = std::atof(token_11.c_str());
+  }
   void set_motor_values(int val_1, int val_2)
   {
     std::stringstream ss;

@@ -111,6 +111,19 @@ def generate_launch_description():
         executable="2_range.py",
     )
 
+    range4_file = Node(
+        package =package_name,
+        executable="4_range.py",
+    )
+    range5_file = Node(
+        package =package_name,
+        executable="5_range.py",
+    )
+
+    range6_file = Node(
+        package =package_name,
+        executable="6_range.py",
+    )
     battery_file = Node(
         package =package_name,
         executable="battery_stat.py",
@@ -180,6 +193,9 @@ def generate_launch_description():
         range_file,
         range1_file,
         range2_file,
+        range4_file,
+        range5_file,
+        range6_file,
         battery_file,
         bno055,
         # imu,

@@ -86,6 +86,15 @@ install(PROGRAMS scripts/1_range.py
 install(PROGRAMS scripts/2_range.py
        DESTINATION lib/${PROJECT_NAME}
 )
+install(PROGRAMS scripts/4_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/5_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
+install(PROGRAMS scripts/6_range.py
+       DESTINATION lib/${PROJECT_NAME}
+)
 install(PROGRAMS scripts/battery_stat.py
        DESTINATION lib/${PROJECT_NAME}
 )
