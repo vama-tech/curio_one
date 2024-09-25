@@ -124,6 +124,14 @@ def generate_launch_description():
         package =package_name,
         executable="6_range.py",
     )
+    range7_file = Node(
+        package =package_name,
+        executable="7_range.py",
+    )
+    range8_file = Node(
+        package =package_name,
+        executable="8_range.py",
+    )
     battery_file = Node(
         package =package_name,
         executable="battery_stat.py",
@@ -196,12 +204,14 @@ def generate_launch_description():
         range4_file,
         range5_file,
         range6_file,
+        range7_file,
+        range8_file,
         battery_file,
+        # delayed_lidar,
         bno055,
         # imu,
         # madgwick,
         ekf_config,
         # camera_detection
-        # delayed_lidar
 
     ])

@@ -117,9 +117,9 @@ public:
   {
     std::string response = send_msg("B\r");
 
-    std::string delired = " ";  
-    size_t del_red = response.find(delired);
-    std::string token_6 = response.substr(0, del_red);
+    std::string delibat = " ";  
+    size_t del_bat = response.find(delibat);
+    std::string token_6 = response.substr(0, del_bat);
 
     val_6 = std::atof(token_6.c_str());
   }
@@ -128,13 +128,13 @@ public:
   {
       std::string response = send_msg("E\r");
 
-      std::string delired = " ";  
-      size_t del_red = response.find(delired);
-      std::string token_7 = response.substr(0, del_red);
+      std::string delired_2 = " ";  
+      size_t del_read = response.find(delired_2);
+      std::string token_7 = response.substr(0, del_read);
       
-      size_t del_red_2 = response.find_last_of(delired); // Find the last occurrence of the delimiter
-      std::string token_8 = response.substr(del_red + delired.length(), del_red_2 - del_red - delired.length());
-      std::string token_9 = response.substr(del_red_2 + delired.length());  // Start from the position after the last delimiter
+      size_t del_read_2 = response.find_last_of(delired_2); // Find the last occurrence of the delimiter
+      std::string token_8 = response.substr(del_read + delired_2.length(), del_read_2 - del_read - delired_2.length());
+      std::string token_9 = response.substr(del_read_2 + delired_2.length());  // Start from the position after the last delimiter
       
       val_7 = std::atof(token_7.c_str());
       val_8 = std::atof(token_8.c_str());
@@ -145,12 +145,12 @@ public:
   {
       std::string response = send_msg("F\r");
 
-      std::string delired = " ";  
-      size_t del_red = response.find(delired);
-      std::string token_10 = response.substr(0, del_red);
+      std::string delired_3 = " ";  
+      size_t del_down_red = response.find(delired_3);
+      std::string token_10 = response.substr(0, del_down_red);
       
-      size_t del_red_2 = response.find_last_of(delired); // Find the last occurrence of the delimiter
-      std::string token_11 = response.substr(del_red + delired.length(), del_red_2 - del_red - delired.length());
+      size_t del_down_red_2 = response.find_last_of(delired_3); // Find the last occurrence of the delimiter
+      std::string token_11 = response.substr(del_down_red + delired_3.length(), del_down_red_2 - del_down_red - delired_3.length());
       
       val_10 = std::atof(token_10.c_str());
       val_11 = std::atof(token_11.c_str());
