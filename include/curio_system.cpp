@@ -308,7 +308,7 @@ CallbackReturn CurioBotSystemHardware::on_deactivate(
     return CallbackReturn::SUCCESS;
 }   
 
-hardware_interface::return_type CurioBotSystemHardware::read()
+hardware_interface::return_type CurioBotSystemHardware::read(const rclcpp::Time & time, const rclcpp::Duration & period)
 {
     // RCLCPP_INFO(rclcpp::get_logger("CurioBotSystemHardware"), "Reading...");
     comms_.read_encoder_values(wheel_l_.enc, wheel_r_.enc);
@@ -345,7 +345,7 @@ hardware_interface::return_type CurioBotSystemHardware::read()
     return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type CurioBotSystemHardware::write()
+hardware_interface::return_type CurioBotSystemHardware::write(const rclcpp::Time & time, const rclcpp::Duration & period)
 {
     // RCLCPP_INFO(rclcpp::get_logger("CurioBotSystemHardware"), "Writing...");
     int motor_l_counts_per_loop = wheel_l_.cmd / wheel_l_.rads_per_count / cfg_.loop_rate;
