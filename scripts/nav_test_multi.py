@@ -7,6 +7,12 @@ import rclpy
 import math
 import tf_transformations
 
+goal_poses = {
+    'pose_1': [-1.09949, 4.88543, 0.962251, 0.272163],
+    'pose_2': [-2.60573, 2.45163, 0.998533, 0.0541421],
+    'pose_3': []
+}
+
 class PoseLoggerNode(rclpy.node.Node):
     def __init__(self):
         super().__init__('pose_logger')
@@ -90,7 +96,7 @@ def main():
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = 'map'
     goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x = -1.09949
+    goal_pose.pose.position.x = goal_poses['pose']
     goal_pose.pose.position.y = 4.88543
     goal_pose.pose.orientation.w = 0.272163
     goal_pose.pose.orientation.z = 0.962251
