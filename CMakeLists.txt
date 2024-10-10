@@ -148,9 +148,12 @@ install(PROGRAMS scripts/nav2_test_way.py
 )   
 
 install(PROGRAMS 
-       scripts/wakeonfacedetect.py
-       scripts/facedetect2.py
-       scripts/wakeandchatfinal.py
+       scripts/nav_test_multi.py
+       scripts/location.py
+       scripts/chatclass.py
+       scripts/facedetect.py
+       scripts/wakewordintefinal.py
+
        DESTINATION lib/${PROJECT_NAME}
 )  
 

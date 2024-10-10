@@ -6,11 +6,12 @@ from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
 import rclpy
 import math
 import tf_transformations
+import playsound
 
 goal_poses = {
-    'pose_1': [-1.09949, 4.88543, 0.962251, 0.272163],
-    'pose_2': [-2.60573, 2.45163, 0.998533, 0.0541421],
-    'pose_3': []
+    'home': [-2.0049, 9.576607, 0.297930, 0.954587],
+    'solar': [2.06911, 8.87763, 0.8418692, 0.539681],
+    'wind': [-0.564153, 6.65056, 0.844142, 0.53612]
 }
 
 class PoseLoggerNode(rclpy.node.Node):
@@ -92,43 +93,68 @@ def main():
     # Wait until Nav2 is active
     navigator.waitUntilNav2Active()
 
-    # Set the goal pose
-    goal_pose = PoseStamped()
-    goal_pose.header.frame_id = 'map'
-    goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x = goal_poses['pose']
-    goal_pose.pose.position.y = 4.88543
-    goal_pose.pose.orientation.w = 0.272163
-    goal_pose.pose.orientation.z = 0.962251
+    for goal_key in goal_poses:
+        # Set the current goal pose
+        goal_pose = PoseStamped()
+        goal_pose.header.frame_id = 'map'
+        goal_pose.header.stamp = navigator.get_clock().now().to_msg()
 
-    pose_logger_node.goal_pose = goal_pose.pose
-    
-    # Start the navigation
-    navigator.goToPose(goal_pose)
+        # Get the goal coordinates and orientation from goal_poses dictionary
+        selected_goal = goal_poses[goal_key]
 
-    # Run the node
-    rclpy.spin_once(pose_logger_node, timeout_sec=1)
-    
-    i = 0
-    while not navigator.isTaskComplete():
-        i += 1
-        feedback = navigator.getFeedback()
-        if feedback and i % 5 == 0:
-            print(f"Estimated time of arrival: {feedback.estimated_time_remaining.sec} seconds.")
-        rclpy.spin_once(pose_logger_node, timeout_sec=1)
+        goal_pose.pose.position.x = selected_goal[0]
+        goal_pose.pose.position.y = selected_goal[1]
+        goal_pose.pose.orientation.w = selected_goal[2]
+        goal_pose.pose.orientation.z = selected_goal[3]
 
-    result = navigator.getResult()
-    if result == TaskResult.SUCCEEDED:
-        print("Goal succeeded!")
-        print(f"Goal Pose: {goal_pose}")
-    elif result == TaskResult.CANCELED:
-        print("Goal was canceled!")
-    elif result == TaskResult.FAILED:
-        print("Goal failed!")
-    else:
-        print("Goal has an invalid return status!")
+        pose_logger_node.goal_pose = goal_pose.pose
+        
+        # Start the navigation to the current goal
+        navigator.goToPose(goal_pose)
+        # Log that we're heading to the next goal
+        print(f"Navigating to {goal_key}: {goal_pose.pose.position.x}, {goal_pose.pose.position.y}")
 
-    # Clean up
+        # After all goals, navigate back to the home position
+        return_base = goal_poses['home']
+        # home_goal = PoseStamped()
+        # home_goal.header.frame_id = 'map'
+        # home_goal.header.stamp = navigator.get_clock().now().to_msg()
+        # home_goal.pose.position.x = return_base[0]
+        # home_goal.pose.position.y = return_base[1]
+        # home_goal.pose.orientation.w = return_base[2]
+        # home_goal.pose.orientation.z = return_base[3]
+
+        # # Navigate back to the home position
+        # print("Navigating back to the home position...")
+        # navigator.goToPose(home_goal)
+        # Run the node and wait for the goal to be reached
+        i = 0
+        while not navigator.isTaskComplete():
+            i += 1
+            feedback = navigator.getFeedback()
+            if feedback and i % 5 == 0:
+                print(f"Estimated time of arrival: {feedback.estimated_time_remaining.sec} seconds.")
+            rclpy.spin_once(pose_logger_node, timeout_sec=1)
+
+        # Check the result and provide feedback
+        result = navigator.getResult()
+        if result == TaskResult.SUCCEEDED:
+            print(f"Successfully reached {goal_key}!")
+            playsound.playsound('/home/jetson/ros2/src/curio_one/scripts/goal.mp3')
+        elif result == TaskResult.CANCELED:
+            print(f"Navigation to {goal_key} was canceled!")
+        elif result == TaskResult.FAILED:
+            print(f"Failed to reach {goal_key}!")
+            playsound.playsound('/home/jetson/ros2/src/curio_one/scripts/base.mp3')
+            navigator.goToPose(return_base)
+        else:
+            print(f"{goal_key} has an invalid return status!")
+
+        # Wait for a moment before moving to the next goal
+        print(f"Waiting before moving to the next goal...")
+        rclpy.spin_once(pose_logger_node, timeout_sec=2)  # Allow the system to settle before next goal
+
+    # Clean up after reaching all goals
     pose_logger_node.destroy_node()
     rclpy.shutdown()
 

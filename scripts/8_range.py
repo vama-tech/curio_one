@@ -24,7 +24,7 @@ class SensorPublisher(Node):
     def dynamic_joint_states_callback(self, msg):
         for interface_value in msg.interface_values:
             if 'Sensor8' in interface_value.interface_names:
-                sensor_value = interface_value.values[7]  # Assuming only one value for simplicity
+                sensor_value = interface_value.values[3]  # Assuming only one value for simplicity
                 scan_msg = LaserScan()
                 scan_msg.header.stamp = self.get_clock().now().to_msg()
                 scan_msg.header.frame_id = 'tof_8'  # Set appropriate frame ID

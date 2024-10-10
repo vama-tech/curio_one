@@ -41,6 +41,14 @@ public:
     timeout_ms_ = timeout_ms;
     serial_conn_.Open(serial_device);
     serial_conn_.SetBaudRate(convert_baud_rate(baud_rate));
+
+    // Reset the Arduino by toggling the DTR signal
+    serial_conn_.SetDTR(false);  // Set DTR low to reset Arduino
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));  // Wait 500ms for reset
+    serial_conn_.SetDTR(true);   // Set DTR high to start Arduino again
+
+    // Optionally, wait for a few seconds to give the Arduino time to boot up after reset
+    std::this_thread::sleep_for(std::chrono::seconds(2));
   }
 
   void disconnect()
@@ -58,15 +66,19 @@ public:
   {
     serial_conn_.FlushIOBuffers(); // Just in case
     serial_conn_.Write(msg_to_send);
-
     std::string response = "";
+    // std::cerr << msg_to_send << std::endl;
+    
     try
     {
       // Responses end with \r\n so we will read up to (and including) the \n.
       serial_conn_.ReadLine(response, '\n', timeout_ms_);
+      // std::cerr << response << std::endl;
+      // std::cerr << timeout_ms_ << std::endl ;
     }
     catch (const LibSerial::ReadTimeout&)
     {
+        std::cerr << response << std::endl;
         std::cerr << "The ReadByte() call has timed out." << std::endl ;
     }
 
@@ -113,6 +125,23 @@ public:
       val_4 = std::atof(token_4.c_str());
       val_5 = std::atof(token_5.c_str());
   }
+
+  void read_md_sensor_values(double &val_7, double &val_8, double &val_9)
+  {
+      std::string response = send_msg("E\r");
+
+      std::string delired_1 = " ";  
+      size_t del_red_1 = response.find(delired_1);
+      std::string token_7 = response.substr(0, del_red_1);
+      
+      size_t del_red_3 = response.find_last_of(delired_1); // Find the last occurrence of the delimiter
+      std::string token_8 = response.substr(del_red_1 + delired_1.length(), del_red_3 - del_red_1 - delired_1.length());
+      std::string token_9 = response.substr(del_red_3 + delired_1.length());  // Start from the position after the last delimiter
+      
+      val_7 = std::atof(token_7.c_str());
+      val_8 = std::atof(token_8.c_str());
+      val_9 = std::atof(token_9.c_str());
+  }
   void read_battery_volt(double &val_6)
   {
     std::string response = send_msg("B\r");
@@ -122,23 +151,6 @@ public:
     std::string token_6 = response.substr(0, del_bat);
 
     val_6 = std::atof(token_6.c_str());
-  }
-
-  void read_up_sensor_values(double &val_7, double &val_8, double &val_9)
-  {
-      std::string response = send_msg("E\r");
-
-      std::string delired_2 = " ";  
-      size_t del_read = response.find(delired_2);
-      std::string token_7 = response.substr(0, del_read);
-      
-      size_t del_read_2 = response.find_last_of(delired_2); // Find the last occurrence of the delimiter
-      std::string token_8 = response.substr(del_read + delired_2.length(), del_read_2 - del_read - delired_2.length());
-      std::string token_9 = response.substr(del_read_2 + delired_2.length());  // Start from the position after the last delimiter
-      
-      val_7 = std::atof(token_7.c_str());
-      val_8 = std::atof(token_8.c_str());
-      val_9 = std::atof(token_9.c_str());
   }
   
   void read_down_sensor_values(double &val_10, double &val_11)

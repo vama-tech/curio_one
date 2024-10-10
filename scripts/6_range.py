@@ -24,7 +24,7 @@ class SensorPublisher(Node):
     def dynamic_joint_states_callback(self, msg):
         for interface_value in msg.interface_values:
             if 'Sensor6' in interface_value.interface_names:
-                sensor_value = interface_value.values[5]  # Assuming only one value for simplicity
+                sensor_value = interface_value.values[7]  # Assuming only one value for simplicity
                 scan_msg = LaserScan()
                 scan_msg.header.stamp = self.get_clock().now().to_msg()
                 scan_msg.header.frame_id = 'tof_6'  # Set appropriate frame ID
@@ -52,8 +52,8 @@ class SensorPublisher(Node):
                 transform.header.frame_id = 'chassis'  # Set appropriate parent frame
                 transform.child_frame_id = 'tof_joint_6'  # Set appropriate child frame
                 transform.transform.translation.x = 0.192  # Set appropriate translation
-                transform.transform.translation.y = -0.120
-                transform.transform.translation.z = 0.580
+                transform.transform.translation.y = -0.100
+                transform.transform.translation.z = 0.06
                 transform.transform.rotation.x = 0.0  # Set appropriate rotation
                 transform.transform.rotation.y = 0.0
                 transform.transform.rotation.z = 0.0

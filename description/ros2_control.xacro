@@ -9,8 +9,8 @@
             <param name="right_wheel_name">right_wheel_joint</param>
             <param name="device">/dev/ttyACM0</param>
             <param name="baud_rate">57600</param>
-            <param name="timeout_ms">2000</param>
-            <param name="loop_rate">45</param>
+            <param name="timeout_ms">1000</param>
+            <param name="loop_rate">30</param>
             <param name="enc_counts_per_rev">752</param>
         </hardware>
         <joint name="left_wheel_joint">
@@ -28,12 +28,12 @@
         <sensor name="tof_joint">
             <state_interface name="Sensor"/> 
             <state_interface name="Sensor1"/>
-            <state_interface name="Sensor2"/> 
-            <state_interface name="Sensor4"/> 
-            <state_interface name="Sensor5"/>
-            <state_interface name="Sensor6"/> 
+            <state_interface name="Sensor2"/>  
             <state_interface name="Sensor7"/>
             <state_interface name="Sensor8"/>
+            <state_interface name="Sensor4"/> 
+            <state_interface name="Sensor5"/>
+            <state_interface name="Sensor6"/>
             <param name="frame_id">tof</param>
         </sensor>   
         

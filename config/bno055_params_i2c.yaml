@@ -33,9 +33,9 @@ bno055:
     connection_type: "i2c"
     i2c_bus: 1
     i2c_addr: 0x28
-    data_query_frequency: 50
+    data_query_frequency: 20    #50
     calib_status_frequency: 0.1
-    frame_id: "imu"
+    frame_id: "base_link"
     operation_mode: 0x0C
     placement_axis_remap: "P2"
     acc_factor: 100.0
